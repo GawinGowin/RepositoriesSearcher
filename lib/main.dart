@@ -7,15 +7,15 @@ import 'package:repo_searcher/pages/home.dart';
 import 'package:repo_searcher/pages/settings.dart';
 
 main() async{
-  const app = MaterialApp(home: Route());
+  const app = MaterialApp(home: RootPage());
   const scope = ProviderScope(
     child: app
   );
   runApp(scope);
 }
 
-class Route extends ConsumerWidget {
-  const Route({super.key});
+class RootPage extends ConsumerWidget {
+  const RootPage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final index = ref.watch(indexProvider);
