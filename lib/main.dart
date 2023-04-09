@@ -19,7 +19,6 @@ class RootPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final index = ref.watch(indexProvider);
-
     const items = [
       BottomNavigationBarItem(
         icon: Icon(Icons.home),
