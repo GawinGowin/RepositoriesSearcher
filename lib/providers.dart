@@ -13,3 +13,11 @@ final searchProvider = StateProvider(
     "page":"",
     }
   );
+
+//ResultPage
+final resultsProvider = StateProvider(
+  (ref) => <dynamic, dynamic>{
+  }
+);
+
+final paginationProvider = StateProvider((ref) => 1);
