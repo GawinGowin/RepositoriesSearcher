@@ -21,7 +21,7 @@ class Results extends ConsumerWidget {
         padding: const EdgeInsets.all(16),
         itemCount: entries.length,
         itemBuilder: (BuildContext context, int index) {
-          return ItemCard();
+          return ItemCard(context);
         }
       )
     );
