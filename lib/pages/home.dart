@@ -10,7 +10,9 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final inputText = ref.watch(inputFieldProvider);
+    final inputField = ref.watch(searchProvider);
+    final copyInputField = {...inputField};
+
     nextPage () => MaterialPageRoute(builder: (context){return Results();});
 
     return Scaffold(
@@ -29,18 +31,23 @@ class Home extends ConsumerWidget {
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.clear),
                   onPressed: () {
-                    ref.read(inputFieldProvider.notifier).state = "";
+                    copyInputField["q"] = "";
+                    ref.read(searchProvider.notifier).state = copyInputField;                   
                     },
                 )
               ),
               maxLength: 100, // 仮
               maxLines: 1,
-              onChanged: (text){ref.read(inputFieldProvider.notifier).state = text;},
-              onSubmitted: inputText == "" ? null : (_){Navigator.push(context, nextPage());},
+              onChanged: (text){
+                copyInputField["q"] = text;
+                ref.read(searchProvider.notifier).state = copyInputField;
+                print(inputField);
+              },
+              onSubmitted: inputField["q"] == "" ? null : (_){Navigator.push(context, nextPage());},
             ),
             ElevatedButton(
-                onPressed: inputText == "" ? null :(){
-                  print(inputText);
+                onPressed: inputField["q"] == "" ? null :(){
+                  print(inputField);
                   Navigator.push(
                     context,
                     nextPage()
