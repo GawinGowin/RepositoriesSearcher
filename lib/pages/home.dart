@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:repo_searcher/pages/results.dart';
+
 class Home extends StatelessWidget {
   const Home({super.key});
 
@@ -9,6 +11,18 @@ class Home extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Home'),
       ),
+      body: ElevatedButton(
+          onPressed: (){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context){return Results();})
+            );
+          },        
+          child: const Text("search"),
+        ),
+
+
+
     );
   }
 }
