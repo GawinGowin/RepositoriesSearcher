@@ -18,7 +18,8 @@ class Results extends ConsumerWidget {
 
     final itemList = ref.watch(dataNotifierProvider);
     final itemListModule = itemList.when(
-      loading: () => Center(child: Text('準備中...')),
+      //loading: () => Center(child: Text('準備中...')),
+      loading: () => Center(child: CircularProgressIndicator(),),
       error: (e, s) => Center(child: Text('エラー $e')),
       data: (d) => Center(child: ItemList(context, d)),
     );
