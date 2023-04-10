@@ -1,7 +1,22 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+part 'providers.g.dart';
 
 //RootPage
-final indexProvider = StateProvider((ref) => 0);
+@riverpod
+class PageNotifier extends _$PageNotifier {
+  @override
+  int build() {
+    return 0; // 最初のデータ
+  }
+
+  void updateState(nextPage) { // データを変更する関数
+    state = nextPage; // データを上書き
+  }
+}
+
+
+
 
 //HomePage
 final searchProvider = StateProvider(
