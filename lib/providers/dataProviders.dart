@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:repo_searcher/utils/responseData.dart';
-import 'package:repo_searcher/providers/providers.dart';
+import 'package:repo_searcher/providers/homeProviders.dart';
 part 'dataProviders.g.dart';
 
 //flutter pub run build_runner watch --delete-conflicting-outputs

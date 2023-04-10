@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'providers.g.dart';
+part 'homeProviders.g.dart';
 
 //RootPage
 @riverpod
