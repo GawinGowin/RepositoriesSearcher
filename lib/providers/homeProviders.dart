@@ -16,19 +16,6 @@ class PageNotifier extends _$PageNotifier {
   }
 }
 
-//HomePage
-/*
-final searchProvider = StateProvider(
-  (ref) => <String, String>{
-    "q":"",
-    "sort":"",
-    "order":"",
-    "per_page":"",
-    "page":"",
-    }
-  );
-*/
-
 @riverpod
 class SearchFieldNotifier extends _$SearchFieldNotifier {
   @override

@@ -16,7 +16,6 @@ class DataNotifier extends _$DataNotifier {
     String host = "api.github.com";
     String path = '/search/repositories';
 
-    //final inputField = ref.watch(searchProvider); // Todo
     final inputField = ref.watch(searchFieldNotifierProvider);
 
     var response = await http.get(Uri.https(host, path, inputField));
@@ -39,7 +38,6 @@ class DataNotifier extends _$DataNotifier {
   }
 }
 
-// final responseProvider = StateProvider((ref) => {});
 @riverpod
 class ResponseNotifier extends _$ResponseNotifier {
   @override

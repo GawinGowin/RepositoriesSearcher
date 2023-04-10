@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:repo_searcher/providers/homeProviders.dart';
 import 'package:repo_searcher/providers/dataProviders.dart';
-
-import 'package:repo_searcher/utils/responseData.dart';
 
 import 'package:repo_searcher/modules/itemList.dart';
 
@@ -13,8 +10,6 @@ class Results extends ConsumerWidget {
   
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //final inputField = ref.watch(searchProvider);  //Todo
-    //final inputField = ref.watch(searchFieldNotifierProvider);
     final itemList = ref.watch(dataNotifierProvider); 
     final itemListModule = itemList.when(
       loading: () => const Center(child: CircularProgressIndicator(),),

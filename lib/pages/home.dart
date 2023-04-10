@@ -10,8 +10,6 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //final inputField = ref.watch(searchProvider);
-    //final copyInputField = {...inputField};
     final inputField = ref.watch(searchFieldNotifierProvider);
     final copyInputField = {...inputField};
 
@@ -42,8 +40,6 @@ class Home extends ConsumerWidget {
               maxLines: 1,
               onChanged: (text){
                 copyInputField["q"] = text;
-                //ref.read(searchProvider.notifier).state = copyInputField;
-                //print(inputField);
                 final notifier = ref.read(searchFieldNotifierProvider.notifier);
                 notifier.updateState(copyInputField);
               },
