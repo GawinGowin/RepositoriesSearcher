@@ -32,8 +32,8 @@ class RootPage extends ConsumerWidget {
     ];
 
     final pages = [
-      Home(),
-      Settings(),
+      const Home(),
+      const Settings(),
     ];
 
     return Scaffold(

@@ -16,20 +16,27 @@ class PageNotifier extends _$PageNotifier {
   }
 }
 
+
 @riverpod
 class SearchFieldNotifier extends _$SearchFieldNotifier {
+  Map<String, dynamic> initMap = <String, dynamic>{
+        "q":"",
+        "sort":"",
+        "order":"",
+        "per_page":"30",
+        "page":"1",
+      };  
+
   @override
   Map<String, dynamic> build() {
-    Map<String, dynamic> initMap = <String, dynamic>{
-      "q":"",
-      "sort":"",
-      "order":"",
-      "per_page":"",
-      "page":"",
-    };
     return initMap;
   }
   void updateState(altMap) {
     state = altMap;
   }
+
+  void resetState() {
+    state = initMap;
+  }  
+
 }
