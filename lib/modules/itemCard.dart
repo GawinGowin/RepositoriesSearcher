@@ -38,7 +38,7 @@ ItemCard(context, index, resultsList) {
                   Text('watcher'),
                   Text('${resultsList[index].watchers_count}')
                 ],
-              ),              
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
