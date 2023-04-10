@@ -18,7 +18,9 @@ class RootPage extends ConsumerWidget {
   const RootPage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final index = ref.watch(indexProvider);
+    //final index = ref.watch(indexProvider);
+    final index = ref.watch(pageNotifierProvider);
+
     const items = [
       BottomNavigationBarItem(
         icon: Icon(Icons.home),
@@ -41,7 +43,9 @@ class RootPage extends ConsumerWidget {
           items: items,
           currentIndex: index,
           onTap: (indexTap){
-            ref.read(indexProvider.notifier).state = indexTap;
+            //ref.read(indexProvider.notifier).state = indexTap;
+            final notifier = ref.read(pageNotifierProvider.notifier);
+            notifier.updateState(indexTap);
           },
         )
     );
