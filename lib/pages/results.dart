@@ -9,59 +9,61 @@ import 'package:repo_searcher/modules/itemCard.dart';
 
 import 'package:repo_searcher/utils/responseData.dart';
 
+const String host = "api.github.com";
+const String path = '/search/repositories';
+
 class Results extends ConsumerWidget {
   Results({super.key});
   
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final List<int> entries = <int>[for (var i = 0; i < 100; i++) i];
-
     final inputField = ref.watch(searchProvider);
-    final resultsList = ref.watch(resultsProvider);
+    final itemList = ref.watch(itemsProvider);
+    final responseList = ref.watch(responseProvider);
 
-    const String host = "api.github.com";
-    const String path = '/search/repositories';
-
-    Future<void> getData() async {
-      try {
-        var response = await http.get(Uri.https(host, path, inputField));
-        var responseJson = checkResponse(response);
-        
-        int count = responseJson["total_count"];
-        bool incomplete_results = responseJson["incomplete_results"];
-        List items = responseJson["items"];
-        List formedItems = items.map((e) => cleanData(e)).toList();
-
-        ref.read(resultsProvider.notifier).state = formedItems;
-
-        return;
-      } catch (_) {
-      }
-    }
+    getData(ref, inputField);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Results'),
+        title: Text('Total: ${responseList["total_count"]} Repositories'),
       ),
 
       body: 
         Container(
           child: ListView.builder(
             padding: const EdgeInsets.all(16),
-            itemCount: resultsList.length,
+            itemCount: itemList.length,
             itemBuilder: (BuildContext context, int index) {
-              return ItemCard(context, index, resultsList);
+              return ItemCard(context, index, itemList);
             }
           ),
         ),
 
       floatingActionButton: FloatingActionButton( //仮
         onPressed: (){
-          getData();          
+          getData(ref, inputField);          
         },
         child: const Icon(Icons.sync),
       ),
     );
+  }
+}
+
+Future<void> getData(ref, inputField) async {
+  try {
+    var response = await http.get(Uri.https(host, path, inputField));
+    var responseJson = checkResponse(response);
+    
+    int count = responseJson["total_count"];
+    bool incomplete_results = responseJson["incomplete_results"];
+    ref.read(responseProvider.notifier).state = {"total_count": count, "incomplete_results": incomplete_results};
+
+    List items = responseJson["items"];
+    List formedItems = items.map((e) => cleanData(e)).toList();
+
+    ref.read(itemsProvider.notifier).state = formedItems;
+    return;
+  } catch (_) {
   }
 }
 
