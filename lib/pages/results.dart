@@ -4,8 +4,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:repo_searcher/providers/providers.dart';
 import 'package:repo_searcher/providers/dataProviders.dart';
 
-import 'package:repo_searcher/modules/itemCard.dart';
 import 'package:repo_searcher/utils/responseData.dart';
+
+import 'package:repo_searcher/modules/itemList.dart';
 
 class Results extends ConsumerWidget {
   Results({super.key});
@@ -17,9 +18,9 @@ class Results extends ConsumerWidget {
 
     final itemList = ref.watch(dataNotifierProvider);
     final itemListModule = itemList.when(
-      loading: () => const Text('準備中...'),
-      error: (e, s) => Text('エラー $e'),
-      data: (d) => Text('取得したデータが存在'),
+      loading: () => Center(child: Text('準備中...')),
+      error: (e, s) => Center(child: Text('エラー $e')),
+      data: (d) => Center(child: ItemList(context, d)),
     );
 
     return Scaffold(
@@ -36,19 +37,7 @@ class Results extends ConsumerWidget {
         },
       )
       ),
-
       body: itemListModule,
-        /*
-        Container(
-          child: ListView.builder(
-            padding: const EdgeInsets.all(16),
-            itemCount: itemList.length,
-            itemBuilder: (BuildContext context, int index) {
-              return ItemCard(context, index, itemList);
-            }
-          ),
-        ),
-        */
 
       floatingActionButton: FloatingActionButton( //仮
         onPressed: (){
