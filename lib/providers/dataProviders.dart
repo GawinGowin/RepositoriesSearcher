@@ -15,7 +15,10 @@ class DataNotifier extends _$DataNotifier {
   Future<List> build() async {
     String host = "api.github.com";
     String path = '/search/repositories';
-    final inputField = ref.watch(searchProvider);
+
+    //final inputField = ref.watch(searchProvider); // Todo
+    final inputField = ref.watch(searchFieldNotifierProvider);
+
     var response = await http.get(Uri.https(host, path, inputField));
     var responseJson = checkResponse(response);
 

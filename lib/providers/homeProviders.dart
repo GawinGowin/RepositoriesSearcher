@@ -17,6 +17,7 @@ class PageNotifier extends _$PageNotifier {
 }
 
 //HomePage
+/*
 final searchProvider = StateProvider(
   (ref) => <String, String>{
     "q":"",
@@ -26,3 +27,22 @@ final searchProvider = StateProvider(
     "page":"",
     }
   );
+*/
+
+@riverpod
+class SearchFieldNotifier extends _$SearchFieldNotifier {
+  @override
+  Map<String, dynamic> build() {
+    Map<String, dynamic> initMap = <String, dynamic>{
+      "q":"",
+      "sort":"",
+      "order":"",
+      "per_page":"",
+      "page":"",
+    };
+    return initMap;
+  }
+  void updateState(altMap) {
+    state = altMap;
+  }
+}
