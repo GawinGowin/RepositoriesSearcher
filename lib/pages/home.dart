@@ -32,7 +32,7 @@ class Home extends ConsumerWidget {
                   icon: const Icon(Icons.clear),
                   onPressed: () {
                     copyInputField["q"] = "";
-                    ref.read(searchProvider.notifier).state = copyInputField;                   
+                    ref.read(searchProvider.notifier).state = copyInputField;
                     },
                 )
               ),

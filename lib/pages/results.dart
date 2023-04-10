@@ -26,6 +26,14 @@ class Results extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Total: ${responseList["total_count"]} Repositories'),
+        leading: IconButton(
+        icon: const Icon(Icons.arrow_back),
+        onPressed: () {
+          ref.read(responseProvider.notifier).state = {};
+          ref.read(itemsProvider.notifier).state = [];
+          Navigator.pop(context, );
+        },
+      )
       ),
 
       body: 
@@ -41,7 +49,7 @@ class Results extends ConsumerWidget {
 
       floatingActionButton: FloatingActionButton( //仮
         onPressed: (){
-          getData(ref, inputField);          
+          getData(ref, inputField);
         },
         child: const Icon(Icons.sync),
       ),
@@ -62,6 +70,7 @@ Future<void> getData(ref, inputField) async {
     List formedItems = items.map((e) => cleanData(e)).toList();
 
     ref.read(itemsProvider.notifier).state = formedItems;
+    print("$count, $incomplete_results");
     return;
   } catch (_) {
   }
