@@ -26,11 +26,3 @@ final searchProvider = StateProvider(
     "page":"",
     }
   );
-
-//ResultPage  
-final responseProvider = StateProvider((ref) => {});
-final paginationProvider = StateProvider((ref) => 1);
-
-final itemsProvider = StateProvider((ref) => []);
-
-

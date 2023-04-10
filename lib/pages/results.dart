@@ -14,27 +14,27 @@ class Results extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final inputField = ref.watch(searchProvider);
-    final responseList = ref.watch(responseProvider);
 
-    final itemList = ref.watch(dataNotifierProvider);
+    final itemList = ref.watch(dataNotifierProvider); 
     final itemListModule = itemList.when(
-      //loading: () => Center(child: Text('準備中...')),
-      loading: () => Center(child: CircularProgressIndicator(),),
+      loading: () => const Center(child: CircularProgressIndicator(),),
       error: (e, s) => Center(child: Text('エラー $e')),
       data: (d) => Center(child: ItemList(context, d)),
     );
 
+    final resInfo = ref.watch(responseNotifierProvider); // dataNotifierProviderで件数の取得等は行った。
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Total: ${responseList["total_count"]} Repositories'),
+        title: Text('Total: ${resInfo["count"]} Repositories'),
         leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () { // Homeに戻る際に情報をリセット
-          ref.read(responseProvider.notifier).state = {};
-
+          final resNotifier = ref.read(responseNotifierProvider.notifier);
           final dataNotifier = ref.read(dataNotifierProvider.notifier);
+          resNotifier.resetState();
           dataNotifier.resetState();
-          Navigator.pop(context, );
+          Navigator.pop(context);
         },
       )
       ),
@@ -42,7 +42,7 @@ class Results extends ConsumerWidget {
 
       floatingActionButton: FloatingActionButton( //仮
         onPressed: (){
-          //getData(ref, inputField);
+          
         },
         child: const Icon(Icons.sync),
       ),

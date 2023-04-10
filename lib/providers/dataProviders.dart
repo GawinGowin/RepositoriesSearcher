@@ -16,12 +16,14 @@ class DataNotifier extends _$DataNotifier {
     String host = "api.github.com";
     String path = '/search/repositories';
     final inputField = ref.watch(searchProvider);
-
     var response = await http.get(Uri.https(host, path, inputField));
     var responseJson = checkResponse(response);
 
-    int count = responseJson["total_count"]; // どこかに移行予定
-    bool incomplete_results = responseJson["incomplete_results"]; // どこかに移行予定
+    int count = responseJson["total_count"];
+    bool incomplete_results = responseJson["incomplete_results"];
+
+    final notifier = ref.read(responseNotifierProvider.notifier);
+    notifier.updateState(count, incomplete_results);
 
     List items = responseJson["items"];
     List formedItems = items.map((e) => cleanData(e)).toList();
@@ -32,8 +34,29 @@ class DataNotifier extends _$DataNotifier {
     state = const AsyncValue.loading();
     state = const AsyncValue.data([]);
   }
-
 }
+
+// final responseProvider = StateProvider((ref) => {});
+@riverpod
+class ResponseNotifier extends _$ResponseNotifier {
+  @override
+  Map build() {
+    return {"count": 0, "incomplete_results": true}; 
+  }
+
+  void updateState(count, incomplete_results) {
+    final newState = {"count": count, "incomplete_results": incomplete_results};
+    state = newState;
+  }
+
+  void resetState() {
+    final newState = {"count": 0, "incomplete_results": true};
+    state = newState;
+  }
+}
+
+//ResultPage
+final paginationProvider = StateProvider((ref) => 1);
 
 dynamic checkResponse(http.Response response) {
   switch (response.statusCode) {
