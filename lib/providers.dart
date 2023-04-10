@@ -16,8 +16,7 @@ final searchProvider = StateProvider(
 
 //ResultPage
 final resultsProvider = StateProvider(
-  (ref) => <dynamic, dynamic>{
-  }
+  (ref) => []
 );
 
 final paginationProvider = StateProvider((ref) => 1);

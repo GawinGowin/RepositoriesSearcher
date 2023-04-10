@@ -7,6 +7,8 @@ import 'package:repo_searcher/providers.dart';
 
 import 'package:repo_searcher/modules/itemCard.dart';
 
+import 'package:repo_searcher/utils/responseData.dart';
+
 class Results extends ConsumerWidget {
   Results({super.key});
   
@@ -24,9 +26,14 @@ class Results extends ConsumerWidget {
       try {
         var response = await http.get(Uri.https(host, path, inputField));
         var responseJson = checkResponse(response);
-        ref.read(resultsProvider.notifier).state = responseJson;
-        //print(ref.read(resultsProvider));
-        //print(Uri.https(host, path, inputField));
+        
+        int count = responseJson["total_count"];
+        bool incomplete_results = responseJson["incomplete_results"];
+        List items = responseJson["items"];
+        List formedItems = items.map((e) => cleanData(e)).toList();
+
+        ref.read(resultsProvider.notifier).state = formedItems;
+
         return;
       } catch (_) {
       }
@@ -39,17 +46,12 @@ class Results extends ConsumerWidget {
 
       body: Column(
         children: [
-          Container(
-            child: Text("$inputField"),
-          ),
-
-          Container(
-            height: 500,
-            child: Column(
-              children: [
-                Text("$resultsMap"),
-              ],
-            ),
+          ListView.builder(
+            padding: const EdgeInsets.all(16),
+            itemCount: entries.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ItemCard(context);
+            }
           ),
 
           FloatingActionButton(
@@ -60,7 +62,8 @@ class Results extends ConsumerWidget {
         ],
       )
       /*
-      body: ListView.builder(
+      body: 
+      ListView.builder(
         padding: const EdgeInsets.all(16),
         itemCount: entries.length,
         itemBuilder: (BuildContext context, int index) {
@@ -71,7 +74,6 @@ class Results extends ConsumerWidget {
     );
   }
 }
-
 
 dynamic checkResponse(http.Response response) {
   switch (response.statusCode) {
