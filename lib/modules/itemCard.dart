@@ -67,8 +67,3 @@ ItemCard(context, index, itemList) {
     )
   );
 }
-
-/**参考
- * https://api.flutter.dev/flutter/material/ListTile-class.html
- * https://api.flutter.dev/flutter/material/AlertDialog-class.html
- */
