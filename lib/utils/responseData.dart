@@ -7,6 +7,7 @@ class ReposData{
   String description;
   int stargazers_count;
   int watchers_count;
+  String language;
   int forks_count;
   int open_issues_count;
   String visibility;
@@ -14,6 +15,7 @@ class ReposData{
   int open_issues;
   int watchers;
   double score;
+  
   ReposData(
     this.name,
     this.full_name ,
@@ -23,6 +25,7 @@ class ReposData{
     this.description,
     this.stargazers_count,
     this.watchers_count,
+    this.language,
     this.forks_count,
     this.open_issues_count,
     this.visibility,
@@ -43,6 +46,7 @@ cleanData(inputItem){
     inputItem["description"] ?? "",
     inputItem["stargazers_count"],
     inputItem["watchers_count"], 
+    inputItem["language"] ?? "",
     inputItem["forks_count"], 
     inputItem["open_issues_count"], 
     inputItem["visibility"], 

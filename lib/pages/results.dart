@@ -17,7 +17,7 @@ class Results extends ConsumerWidget {
     final List<int> entries = <int>[for (var i = 0; i < 100; i++) i];
 
     final inputField = ref.watch(searchProvider);
-    final resultsMap = ref.watch(resultsProvider);
+    final resultsList = ref.watch(resultsProvider);
 
     const String host = "api.github.com";
     const String path = '/search/repositories';
@@ -44,33 +44,23 @@ class Results extends ConsumerWidget {
         title: Text('Results'),
       ),
 
-      body: Column(
-        children: [
-          ListView.builder(
+      body: 
+        Container(
+          child: ListView.builder(
             padding: const EdgeInsets.all(16),
-            itemCount: entries.length,
+            itemCount: resultsList.length,
             itemBuilder: (BuildContext context, int index) {
-              return ItemCard(context);
+              return ItemCard(context, index, resultsList);
             }
           ),
+        ),
 
-          FloatingActionButton(
-            onPressed: (){
-              getData();
-            },
-          ),
-        ],
-      )
-      /*
-      body: 
-      ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: entries.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ItemCard(context);
-        }
-      )
-      */
+      floatingActionButton: FloatingActionButton( //仮
+        onPressed: (){
+          getData();          
+        },
+        child: const Icon(Icons.sync),
+      ),
     );
   }
 }
