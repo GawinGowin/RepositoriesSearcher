@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+
 part 'providers.g.dart';
 
 //RootPage
@@ -15,9 +16,6 @@ class PageNotifier extends _$PageNotifier {
   }
 }
 
-
-
-
 //HomePage
 final searchProvider = StateProvider(
   (ref) => <String, String>{
@@ -31,5 +29,8 @@ final searchProvider = StateProvider(
 
 //ResultPage  
 final responseProvider = StateProvider((ref) => {});
-final itemsProvider = StateProvider((ref) => []);
 final paginationProvider = StateProvider((ref) => 1);
+
+final itemsProvider = StateProvider((ref) => []);
+
+
