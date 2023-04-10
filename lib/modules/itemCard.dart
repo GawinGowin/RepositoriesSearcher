@@ -1,56 +1,56 @@
 import 'package:flutter/material.dart';
 
-ItemCard(context, index, resultsList) {
+ItemCard(context, index, itemList) {
   return Card(
     child: ListTile(
-      title: Text('${resultsList[index].name}'),
-      subtitle: Text('${resultsList[index].description}'),
+      title: Text('${itemList[index].name}'),
+      subtitle: Text('${itemList[index].description}'),
       trailing: IconButton(
         icon: const Icon(Icons.open_in_new),
-        onPressed: () {print('${resultsList[index].html_url}');},
+        onPressed: () {print('${itemList[index].html_url}');},
       ),
       onTap: () => showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-          title: Image.network('${resultsList[index].avatar_url}'),
+          title: Image.network('${itemList[index].avatar_url}'),
           content: Column(
             children: [
-              Text('${resultsList[index].name}'),
-              Text('${resultsList[index].description}'),
+              Text('${itemList[index].name}'),
+              Text('${itemList[index].description}'),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text('Language'),
-                  Text('${resultsList[index].language}'),
+                  Text('${itemList[index].language}'),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text('Star'),
-                  Text('${resultsList[index].stargazers_count}'),
+                  Text('${itemList[index].stargazers_count}'),
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text('watcher'),
-                  Text('${resultsList[index].watchers_count}')
+                  Text('${itemList[index].watchers_count}')
                 ],
-              ),              
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text('forks'),
-                  Text('${resultsList[index].forks_count}')
+                  Text('${itemList[index].forks_count}')
                 ],
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Text('Issue'),
-                  Text('${resultsList[index].open_issues_count}')
+                  Text('${itemList[index].open_issues_count}')
                 ],
               ),
             ],
