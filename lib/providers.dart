@@ -3,8 +3,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'providers.g.dart';
 
 //RootPage
-final indexProvider = StateProvider((ref) => 0);
-
 @riverpod
 class PageNotifier extends _$PageNotifier {
   @override
