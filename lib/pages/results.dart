@@ -7,6 +7,8 @@ import 'package:repo_searcher/providers.dart';
 
 import 'package:repo_searcher/modules/itemCard.dart';
 
+import 'package:repo_searcher/utils/responseData.dart';
+
 class Results extends ConsumerWidget {
   Results({super.key});
   
@@ -15,7 +17,7 @@ class Results extends ConsumerWidget {
     final List<int> entries = <int>[for (var i = 0; i < 100; i++) i];
 
     final inputField = ref.watch(searchProvider);
-    final resultsMap = ref.watch(resultsProvider);
+    final resultsList = ref.watch(resultsProvider);
 
     const String host = "api.github.com";
     const String path = '/search/repositories';
@@ -24,9 +26,14 @@ class Results extends ConsumerWidget {
       try {
         var response = await http.get(Uri.https(host, path, inputField));
         var responseJson = checkResponse(response);
-        ref.read(resultsProvider.notifier).state = responseJson;
-        //print(ref.read(resultsProvider));
-        //print(Uri.https(host, path, inputField));
+        
+        int count = responseJson["total_count"];
+        bool incomplete_results = responseJson["incomplete_results"];
+        List items = responseJson["items"];
+        List formedItems = items.map((e) => cleanData(e)).toList();
+
+        ref.read(resultsProvider.notifier).state = formedItems;
+
         return;
       } catch (_) {
       }
@@ -37,41 +44,26 @@ class Results extends ConsumerWidget {
         title: Text('Results'),
       ),
 
-      body: Column(
-        children: [
-          Container(
-            child: Text("$inputField"),
+      body: 
+        Container(
+          child: ListView.builder(
+            padding: const EdgeInsets.all(16),
+            itemCount: resultsList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return ItemCard(context, index, resultsList);
+            }
           ),
+        ),
 
-          Container(
-            height: 500,
-            child: Column(
-              children: [
-                Text("$resultsMap"),
-              ],
-            ),
-          ),
-
-          FloatingActionButton(
-            onPressed: (){
-              getData();
-            },
-          ),
-        ],
-      )
-      /*
-      body: ListView.builder(
-        padding: const EdgeInsets.all(16),
-        itemCount: entries.length,
-        itemBuilder: (BuildContext context, int index) {
-          return ItemCard(context);
-        }
-      )
-      */
+      floatingActionButton: FloatingActionButton( //仮
+        onPressed: (){
+          getData();          
+        },
+        child: const Icon(Icons.sync),
+      ),
     );
   }
 }
-
 
 dynamic checkResponse(http.Response response) {
   switch (response.statusCode) {
