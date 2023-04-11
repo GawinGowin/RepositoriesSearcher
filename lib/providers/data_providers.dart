@@ -78,12 +78,12 @@ dynamic checkResponse(http.Response response) {
 }
 
 Future<dynamic> loadHeader() async {
-  Map header;
   try{
     final config = await rootBundle.loadString('.config.yaml');
-    header = loadYaml(config);
+    Map<String, String> header = loadYaml(config);
     return header;
   } catch(e){
-    return {};
+    Map<String, String> header = <String, String>{};
+    return header;
   } 
 }
