@@ -9,7 +9,6 @@ class PageNotifier extends _$PageNotifier {
   int build() {
     return 0; // 最初のデータ
   }
-
   void updateState(nextPage) { // データを変更する関数
     state = nextPage; // データを上書き
   }
@@ -21,10 +20,9 @@ class SearchFieldNotifier extends _$SearchFieldNotifier {
         "q":"",
         "sort":"",
         "order":"",
-        "per_page":"30",
+        "per_page":"90",
         "page":"1",
       };  
-
   @override
   Map<String, dynamic> build() {
     return initMap;
@@ -32,11 +30,9 @@ class SearchFieldNotifier extends _$SearchFieldNotifier {
   void updateState(altMap) {
     state = altMap;
   }
-
   void resetState() {
     state = initMap;
   } 
-
   void resetPageState() {
     var copyState = {...state};
     copyState["page"] = "1";   
@@ -46,6 +42,20 @@ class SearchFieldNotifier extends _$SearchFieldNotifier {
     var copyState = {...state};
     copyState["q"] = "";   
     state = copyState;
-  }    
+  }
+}
 
+//RootPage
+@riverpod
+class AlertMsgNotifier extends _$AlertMsgNotifier {
+  @override
+  bool build() {
+    return true;
+  }
+  void setState() {
+    state = false;
+  }
+  void resetState() {
+    state = true;
+  }  
 }

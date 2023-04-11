@@ -11,6 +11,8 @@ PagenationList(WidgetRef ref, int nowPage, int repoPerPage, int totalRepos){
       copyInputField["page"] = "$number";
       final notifier = ref.read(searchFieldNotifierProvider.notifier);
       notifier.updateState(copyInputField);   
+      final alertNotifier = ref.read(alertMsgNotifierProvider.notifier);
+      alertNotifier.setState();
     }
 
     if(now){
@@ -27,8 +29,14 @@ PagenationList(WidgetRef ref, int nowPage, int repoPerPage, int totalRepos){
       );
     }
   }
+
   const Widget more = Icon(Icons.more_horiz);
   int totalPages = totalRepos ~/ repoPerPage + 1;
+
+  if (totalRepos > 1000){
+    totalPages = 1000 ~/ repoPerPage + 1;
+  }
+
   List<Widget> pageList = [];
 
   if (totalPages == 1){
