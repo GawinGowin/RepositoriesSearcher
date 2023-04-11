@@ -2,7 +2,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:repo_searcher/utils/responseData.dart';
+import 'package:repo_searcher/utils/response_data.dart';
 import 'package:repo_searcher/providers/home_providers.dart';
 part 'data_providers.g.dart';
 
@@ -28,7 +28,7 @@ class DataNotifier extends _$DataNotifier {
     List items = responseJson["items"];
     List formedItems = items.map((e) => cleanData(e)).toList();
     return formedItems;
-  }
+  }  
   
   void resetState() async {
     state = const AsyncValue.loading();
