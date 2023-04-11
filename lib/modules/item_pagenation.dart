@@ -3,7 +3,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:repo_searcher/providers/home_providers.dart';
 
 PagenationList(WidgetRef ref, int nowPage, int repoPerPage, int totalRepos){
-
   Widget returnNumButton(int number, bool now){
     onPressedFunction(){
       final inputField = ref.read(searchFieldNotifierProvider);
@@ -11,6 +10,8 @@ PagenationList(WidgetRef ref, int nowPage, int repoPerPage, int totalRepos){
       copyInputField["page"] = "$number";
       final notifier = ref.read(searchFieldNotifierProvider.notifier);
       notifier.updateState(copyInputField);   
+      final alertNotifier = ref.read(alertMsgNotifierProvider.notifier);
+      alertNotifier.setState();
     }
 
     if(now){

@@ -20,8 +20,9 @@ class Results extends ConsumerWidget {
     );
     final int totalRepos = ref.watch(repoCountNotifierProvider); // dataNotifierProviderで件数の取得等は行った。
     final inputField = ref.watch(searchFieldNotifierProvider); // Pagenation制御のために必要。
-    
-    if (totalRepos > 1000){
+    final alertCheck = ref.watch(alertMsgNotifierProvider);
+
+    if (alertCheck && totalRepos > 1000){
       const snackBar = SnackBar(content: Text('最初の1000件を表示しています'));
       Future.delayed(const Duration(seconds: 0), () {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -37,15 +38,17 @@ class Results extends ConsumerWidget {
           final resNotifier = ref.read(repoCountNotifierProvider.notifier);
           final dataNotifier = ref.read(dataNotifierProvider.notifier);
           final fieldNotifier = ref.read(searchFieldNotifierProvider.notifier);
+          final alertNotifier = ref.read(alertMsgNotifierProvider.notifier);
           resNotifier.resetState();
           dataNotifier.resetState();
           fieldNotifier.resetPageState();
+          alertNotifier.resetState();
           Navigator.pop(context);
         },
       )
       ),
       body: itemListModule,
-      
+
       bottomNavigationBar: PagenationList(
         ref, int.parse(inputField["page"]), int.parse(inputField["per_page"]), totalRepos
         // リファクタリングの余地あり。inputField["page"]などはPagenationList内部でも取得できる。
