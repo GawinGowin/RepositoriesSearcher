@@ -8,7 +8,7 @@ import 'package:repo_searcher/modules/item_list.dart';
 import 'package:repo_searcher/modules/item_pagenation.dart';
 
 class Results extends ConsumerWidget {
-  Results({super.key});
+  const Results({super.key});
   
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -40,7 +40,9 @@ class Results extends ConsumerWidget {
       body: itemListModule,
       
       bottomNavigationBar: PagenationList(
-        ref, int.parse(inputField["page"]), int.parse(inputField["per_page"]), resInfo),
+        ref, int.parse(inputField["page"]), int.parse(inputField["per_page"]), resInfo
+        // リファクタリングの余地あり。inputField["page"]などはPagenationList内部でも取得できる。
+      ),
 
       floatingActionButton: FloatingActionButton(
         onPressed: (){
