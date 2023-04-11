@@ -43,12 +43,6 @@ class Results extends ConsumerWidget {
         ref, int.parse(inputField["page"]), int.parse(inputField["per_page"]), resInfo
         // リファクタリングの余地あり。inputField["page"]などはPagenationList内部でも取得できる。
       ),
-
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-        },
-        child: const Icon(Icons.sync),
-      ),
     );
   }
 }
