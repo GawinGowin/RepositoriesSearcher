@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:repo_searcher/providers/home_providers.dart';
 import 'package:repo_searcher/pages/results.dart';
 
 
-class Home extends ConsumerWidget {
-  const Home({super.key});
+class Home extends HookConsumerWidget {
+  const Home({super.key});  
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final inputField = ref.watch(searchFieldNotifierProvider);
     final copyInputField = {...inputField};
-
+  
+    final textEditingController = useTextEditingController();
+    final focusNode = useFocusNode();
+    
     nextPage () => MaterialPageRoute(builder: (context){return Results();});
 
     return Scaffold(
@@ -25,20 +29,24 @@ class Home extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextField(
+              maxLines: 1,
+              maxLength: 256, //根拠：https://docs.github.com/ja/rest/search?apiVersion=2022-11-28#limitations-on-query-length
+              focusNode: focusNode,
+              controller: textEditingController,
+              
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 labelText: "Search",
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.clear),
                   onPressed: () {
-                    //Todo
-                    //copyInputField["q"] = "";
-                    //ref.read(searchProvider.notifier).state = copyInputField;
-                    },
+                    textEditingController.clear();
+                    final notifier = ref.read(searchFieldNotifierProvider.notifier);
+                    notifier.clearTextState();
+                  },
                 )
               ),
-              maxLength: 256, //根拠：https://docs.github.com/ja/rest/search?apiVersion=2022-11-28#limitations-on-query-length
-              maxLines: 1,
+
               onChanged: (text){
                 copyInputField["q"] = text;
                 final notifier = ref.read(searchFieldNotifierProvider.notifier);
@@ -48,11 +56,11 @@ class Home extends ConsumerWidget {
             ),
             ElevatedButton(
                 onPressed: inputField["q"] == "" ? null :(){
-                  print(inputField);
                   Navigator.push(
                     context,
                     nextPage()
                   );
+                print(inputField);
                 },
                 child: const Text("search"),
               ),
