@@ -28,7 +28,7 @@ PagenationList(WidgetRef ref, int nowPage, int repoPerPage, int totalRepos){
     }
   }
 
-  int totalPages = totalRepos ~/ repoPerPage;
+  int totalPages = totalRepos ~/ repoPerPage + 1;
  
   const Widget more = Icon(Icons.more_horiz);
   const Widget next = Icon(Icons.navigate_next);
@@ -89,8 +89,8 @@ PagenationList(WidgetRef ref, int nowPage, int repoPerPage, int totalRepos){
     pageList.add(returnNumButton(totalPages, false));
   }
 
-  pageList.insert(0, before);
-  pageList.add(next);
+  //pageList.insert(0, before);
+  //pageList.add(next);
 
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,

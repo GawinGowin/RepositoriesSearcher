@@ -22,7 +22,7 @@ class SearchFieldNotifier extends _$SearchFieldNotifier {
         "q":"",
         "sort":"",
         "order":"",
-        "per_page":"30",
+        "per_page":"100",
         "page":"1",
       };  
 
