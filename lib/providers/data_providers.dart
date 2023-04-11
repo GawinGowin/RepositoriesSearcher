@@ -1,6 +1,9 @@
+import 'package:flutter/services.dart' show rootBundle;
+
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:yaml/yaml.dart';
 
 import 'package:repo_searcher/utils/response_data.dart';
 import 'package:repo_searcher/providers/home_providers.dart';
@@ -14,12 +17,14 @@ class DataNotifier extends _$DataNotifier {
   //AsyncNotifierのbuild()メソッド内でref.watchおよびref.readの使用が推奨されないため
   @override
   Future<List> build() async {
-    String host = "api.github.com";
-    String path = '/search/repositories';
+    const String host = "api.github.com";
+    const String path = '/search/repositories';
+
+    var header = await loadHeader();
 
     final inputField = ref.watch(searchFieldNotifierProvider);
 
-    var response = await http.get(Uri.https(host, path, inputField));
+    var response = await http.get(Uri.https(host, path, inputField), headers: header);
     var responseJson = checkResponse(response);
 
     int count = responseJson["total_count"];
@@ -70,4 +75,15 @@ dynamic checkResponse(http.Response response) {
     default:
       throw Exception('検索ごとに最大 1,000 件の結果が取得可能です。');
   }
+}
+
+Future<dynamic> loadHeader() async {
+  try{
+    final config = await rootBundle.loadString('.config.yaml');
+    Map<String, String> header = loadYaml(config);
+    return header;
+  } catch(e){
+    Map<String, String> header = <String, String>{};
+    return header;
+  } 
 }
