@@ -41,6 +41,11 @@ class SearchFieldNotifier extends _$SearchFieldNotifier {
     var copyState = {...state};
     copyState["page"] = "1";   
     state = copyState;
-  }  
+  }
+  void clearTextState() {
+    var copyState = {...state};
+    copyState["q"] = "";   
+    state = copyState;
+  }    
 
 }
