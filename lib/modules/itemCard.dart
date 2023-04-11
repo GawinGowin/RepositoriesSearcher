@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-ItemCard(context, index, itemList) {
+Widget ItemCard(context, index, itemList) {
   return Card(
     child: ListTile(
       title: Text('${itemList[index].name}'),
