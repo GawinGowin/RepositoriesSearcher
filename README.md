@@ -4,13 +4,30 @@ flutter engineer codecheck
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+### 1. Clone the sample project
 
-A few resources to get you started if this is your first Flutter project:
+```sh
+$ git clone https://github.com/GawinGowin/RepositoriesSearcher
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 2. Copy the config.yaml file to config.yaml file.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Open your favorite code editor and copy `.example.config.yaml` to `.config.yaml` file.
+
+```bash
+$ cp .example.config.yaml .config.yaml
+```
+
+### 3. Modify config.yaml file
+
+```yaml title=".config.yaml"
+"Authorization": "Bearer <YOUR-TOKEN>"
+```
+put your **personal access token** or **GitHub App user access token** into `<YOUR-TOKEN>`
+
+### 4. Install the dependecies and run app
+
+```sh
+flutter pub get
+flutter run
+```
