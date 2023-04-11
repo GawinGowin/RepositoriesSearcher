@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 import 'package:repo_searcher/utils/responseData.dart';
-import 'package:repo_searcher/providers/providers.dart';
+import 'package:repo_searcher/providers/homeProviders.dart';
 part 'dataProviders.g.dart';
 
 //flutter pub run build_runner watch --delete-conflicting-outputs
@@ -15,15 +15,16 @@ class DataNotifier extends _$DataNotifier {
   Future<List> build() async {
     String host = "api.github.com";
     String path = '/search/repositories';
-    final inputField = ref.watch(searchProvider);
+
+    final inputField = ref.watch(searchFieldNotifierProvider);
+
     var response = await http.get(Uri.https(host, path, inputField));
     var responseJson = checkResponse(response);
 
     int count = responseJson["total_count"];
-    bool incomplete_results = responseJson["incomplete_results"];
 
-    final notifier = ref.read(responseNotifierProvider.notifier);
-    notifier.updateState(count, incomplete_results);
+    final notifier = ref.read(repoCountNotifierProvider.notifier);
+    notifier.updateState(count);
 
     List items = responseJson["items"];
     List formedItems = items.map((e) => cleanData(e)).toList();
@@ -36,26 +37,22 @@ class DataNotifier extends _$DataNotifier {
   }
 }
 
-// final responseProvider = StateProvider((ref) => {});
 @riverpod
-class ResponseNotifier extends _$ResponseNotifier {
+class RepoCountNotifier extends _$RepoCountNotifier {
   @override
-  Map build() {
-    return {"count": 0, "incomplete_results": true}; 
+  int build() {
+    return 0;
   }
 
-  void updateState(count, incomplete_results) {
-    final newState = {"count": count, "incomplete_results": incomplete_results};
-    state = newState;
+  void updateState(newData) {
+    state = newData;
   }
-
   void resetState() {
-    final newState = {"count": 0, "incomplete_results": true};
-    state = newState;
-  }
+    state = 0;
+  }  
 }
 
-//ResultPage
+//Todo
 final paginationProvider = StateProvider((ref) => 1);
 
 dynamic checkResponse(http.Response response) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:repo_searcher/providers/providers.dart';
+import 'package:repo_searcher/providers/homeProviders.dart';
 import 'package:repo_searcher/pages/results.dart';
 
 
@@ -10,7 +10,7 @@ class Home extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final inputField = ref.watch(searchProvider);
+    final inputField = ref.watch(searchFieldNotifierProvider);
     final copyInputField = {...inputField};
 
     nextPage () => MaterialPageRoute(builder: (context){return Results();});
@@ -31,8 +31,8 @@ class Home extends ConsumerWidget {
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.clear),
                   onPressed: () {
-                    copyInputField["q"] = "";
-                    ref.read(searchProvider.notifier).state = copyInputField;
+                    //copyInputField["q"] = "";
+                    //ref.read(searchProvider.notifier).state = copyInputField;
                     },
                 )
               ),
@@ -40,8 +40,8 @@ class Home extends ConsumerWidget {
               maxLines: 1,
               onChanged: (text){
                 copyInputField["q"] = text;
-                ref.read(searchProvider.notifier).state = copyInputField;
-                print(inputField);
+                final notifier = ref.read(searchFieldNotifierProvider.notifier);
+                notifier.updateState(copyInputField);
               },
               onSubmitted: inputField["q"] == "" ? null : (_){Navigator.push(context, nextPage());},
             ),

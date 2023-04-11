@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:repo_searcher/providers/providers.dart';
+import 'package:repo_searcher/providers/homeProviders.dart';
 
 import 'package:repo_searcher/pages/home.dart';
 import 'package:repo_searcher/pages/settings.dart';
@@ -32,8 +32,8 @@ class RootPage extends ConsumerWidget {
     ];
 
     final pages = [
-      Home(),
-      Settings(),
+      const Home(),
+      const Settings(),
     ];
 
     return Scaffold(

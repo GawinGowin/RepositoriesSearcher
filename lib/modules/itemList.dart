@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:repo_searcher/modules/itemCard.dart';
 
-ItemList(context, d) {
+Widget ItemList(context, d) {
   if (d.length != 0){
     return Container(
       child: ListView.builder(
