@@ -26,17 +26,18 @@ class Home extends ConsumerWidget {
           children: [
             TextField(
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
                 labelText: "Search",
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.clear),
                   onPressed: () {
+                    //Todo
                     //copyInputField["q"] = "";
                     //ref.read(searchProvider.notifier).state = copyInputField;
                     },
                 )
               ),
-              maxLength: 100, // 仮
+              maxLength: 256, //根拠：https://docs.github.com/ja/rest/search?apiVersion=2022-11-28#limitations-on-query-length
               maxLines: 1,
               onChanged: (text){
                 copyInputField["q"] = text;
