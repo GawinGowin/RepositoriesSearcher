@@ -16,7 +16,6 @@ class PageNotifier extends _$PageNotifier {
   }
 }
 
-
 @riverpod
 class SearchFieldNotifier extends _$SearchFieldNotifier {
   Map<String, dynamic> initMap = <String, dynamic>{
@@ -38,5 +37,4 @@ class SearchFieldNotifier extends _$SearchFieldNotifier {
   void resetState() {
     state = initMap;
   }  
-
 }
