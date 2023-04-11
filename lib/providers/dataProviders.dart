@@ -22,10 +22,9 @@ class DataNotifier extends _$DataNotifier {
     var responseJson = checkResponse(response);
 
     int count = responseJson["total_count"];
-    bool incomplete_results = responseJson["incomplete_results"];
 
-    final notifier = ref.read(responseNotifierProvider.notifier);
-    notifier.updateState(count, incomplete_results);
+    final notifier = ref.read(repoCountNotifierProvider.notifier);
+    notifier.updateState(count);
 
     List items = responseJson["items"];
     List formedItems = items.map((e) => cleanData(e)).toList();
@@ -39,24 +38,21 @@ class DataNotifier extends _$DataNotifier {
 }
 
 @riverpod
-class ResponseNotifier extends _$ResponseNotifier {
+class RepoCountNotifier extends _$RepoCountNotifier {
   @override
-  Map build() {
-    return {"count": 0, "incomplete_results": true}; 
+  int build() {
+    return 0;
   }
 
-  void updateState(count, incomplete_results) {
-    final newState = {"count": count, "incomplete_results": incomplete_results};
-    state = newState;
+  void updateState(newData) {
+    state = newData;
   }
-
   void resetState() {
-    final newState = {"count": 0, "incomplete_results": true};
-    state = newState;
-  }
+    state = 0;
+  }  
 }
 
-//ResultPage
+//Todo
 final paginationProvider = StateProvider((ref) => 1);
 
 dynamic checkResponse(http.Response response) {

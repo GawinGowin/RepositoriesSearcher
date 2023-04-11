@@ -6,7 +6,7 @@ part of 'dataProviders.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dataNotifierHash() => r'7589e37b5f1876768884bc50a282779d2ba66e0e';
+String _$dataNotifierHash() => r'0898ff9637858b8964c84c6f082e3907834f711d';
 
 /// See also [DataNotifier].
 @ProviderFor(DataNotifier)
@@ -21,20 +21,20 @@ final dataNotifierProvider =
 );
 
 typedef _$DataNotifier = AutoDisposeAsyncNotifier<List<dynamic>>;
-String _$responseNotifierHash() => r'c555790d3e9cf96bdf1b07995bb91f17fd545a6c';
+String _$repoCountNotifierHash() => r'3746dbd96041281e8bda5ed55dc9bd6a8925f727';
 
-/// See also [ResponseNotifier].
-@ProviderFor(ResponseNotifier)
-final responseNotifierProvider = AutoDisposeNotifierProvider<ResponseNotifier,
-    Map<dynamic, dynamic>>.internal(
-  ResponseNotifier.new,
-  name: r'responseNotifierProvider',
+/// See also [RepoCountNotifier].
+@ProviderFor(RepoCountNotifier)
+final repoCountNotifierProvider =
+    AutoDisposeNotifierProvider<RepoCountNotifier, int>.internal(
+  RepoCountNotifier.new,
+  name: r'repoCountNotifierProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
       ? null
-      : _$responseNotifierHash,
+      : _$repoCountNotifierHash,
   dependencies: null,
   allTransitiveDependencies: null,
 );
 
-typedef _$ResponseNotifier = AutoDisposeNotifier<Map<dynamic, dynamic>>;
+typedef _$RepoCountNotifier = AutoDisposeNotifier<int>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
