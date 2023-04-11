@@ -31,7 +31,7 @@ PagenationList(WidgetRef ref, int nowPage, int repoPerPage, int totalRepos){
   int totalPages = totalRepos ~/ repoPerPage + 1;
   List<Widget> pageList = [];
 
-  if (totalPages == 0){
+  if (totalPages == 1){
     return ;
   }    
 
