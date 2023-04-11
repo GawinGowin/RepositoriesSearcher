@@ -30,7 +30,7 @@ Widget ItemCard(context, index, itemList) {
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   child: Text(
                     '${itemList[index].name}',
-                    style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.5),
+                    style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.4),
                   ),
                 ),
                 // https://primer.style/design/foundations/icons/
@@ -95,12 +95,12 @@ TableRow tablePartial(Widget key, Widget value){
   return TableRow(
     children: [
       Container(
-        margin: const EdgeInsets.symmetric(vertical: 5),
-        padding: const EdgeInsets.symmetric(vertical: 2),
+        margin: const EdgeInsets.symmetric(vertical: 4),
+
         child: Center(child: key)
       ),
       Container(
-        margin: const EdgeInsets.symmetric(vertical: 5),
+        margin: const EdgeInsets.symmetric(vertical: 4),
         child: Center(child: value)
       ),
     ]
