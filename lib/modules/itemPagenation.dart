@@ -89,8 +89,8 @@ PagenationList(WidgetRef ref, int nowPage, int repoPerPage, int totalRepos){
     pageList.add(returnNumButton(totalPages, false));
   }
 
-  pageList.insert(0, before);
-  pageList.add(next);
+  //pageList.insert(0, before);
+  //pageList.add(next);
 
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
