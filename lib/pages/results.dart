@@ -8,14 +8,14 @@ import 'package:repo_searcher/modules/item_list.dart';
 import 'package:repo_searcher/modules/item_pagenation.dart';
 
 class Results extends ConsumerWidget {
-  Results({super.key});
+  const Results({super.key});
   
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final itemList = ref.watch(dataNotifierProvider); 
     final itemListModule = itemList.when(
       loading: () => const Center(child: CircularProgressIndicator(),),
-      error: (e, s) => Center(child: Text('エラー $e')),
+      error: (e, s) => Center(child: Text('$e')),
       data: (d) => Center(child: ItemList(context, d)),
     );
     final int resInfo = ref.watch(repoCountNotifierProvider); // dataNotifierProviderで件数の取得等は行った。
@@ -40,7 +40,9 @@ class Results extends ConsumerWidget {
       body: itemListModule,
       
       bottomNavigationBar: PagenationList(
-        ref, int.parse(inputField["page"]), int.parse(inputField["per_page"]), resInfo),
+        ref, int.parse(inputField["page"]), int.parse(inputField["per_page"]), resInfo
+        // リファクタリングの余地あり。inputField["page"]などはPagenationList内部でも取得できる。
+      ),
 
       floatingActionButton: FloatingActionButton(
         onPressed: (){
