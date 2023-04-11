@@ -22,7 +22,7 @@ final pageNotifierProvider =
 
 typedef _$PageNotifier = AutoDisposeNotifier<int>;
 String _$searchFieldNotifierHash() =>
-    r'c33e9fae95a08aad3a1b67745132854f43b35d1f';
+    r'dce63717117a83b08cf03cfdf9b204869d3a7356';
 
 /// See also [SearchFieldNotifier].
 @ProviderFor(SearchFieldNotifier)

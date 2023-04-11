@@ -23,7 +23,7 @@ class Results extends ConsumerWidget {
     final alertCheck = ref.watch(alertMsgNotifierProvider);
 
     if (alertCheck && totalRepos > 1000){
-      const snackBar = SnackBar(content: Text('最初の1000件を表示しています'));
+      const snackBar = SnackBar(content: Text('検索ごとに最大1,000件の結果を提供しています。'));
       Future.delayed(const Duration(seconds: 0), () {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
       });
