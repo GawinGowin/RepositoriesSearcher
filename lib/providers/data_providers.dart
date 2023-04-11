@@ -10,6 +10,8 @@ part 'data_providers.g.dart';
 
 @riverpod
 class DataNotifier extends _$DataNotifier {
+  // Todo refuctor
+  //AsyncNotifierのbuild()メソッド内でref.watchおよびref.readの使用が推奨されないため
   @override
   Future<List> build() async {
     String host = "api.github.com";
