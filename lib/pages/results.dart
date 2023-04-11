@@ -15,7 +15,7 @@ class Results extends ConsumerWidget {
     final itemList = ref.watch(dataNotifierProvider); 
     final itemListModule = itemList.when(
       loading: () => const Center(child: CircularProgressIndicator(),),
-      error: (e, s) => Center(child: Text('エラー $e')),
+      error: (e, s) => Center(child: Text('$e')),
       data: (d) => Center(child: ItemList(context, d)),
     );
     final int resInfo = ref.watch(repoCountNotifierProvider); // dataNotifierProviderで件数の取得等は行った。
