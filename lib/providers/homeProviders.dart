@@ -36,5 +36,12 @@ class SearchFieldNotifier extends _$SearchFieldNotifier {
 
   void resetState() {
     state = initMap;
+  } 
+
+  void resetPageState() {
+    var copyState = {...state};
+    copyState["page"] = "1";   
+    state = copyState;
   }  
+
 }

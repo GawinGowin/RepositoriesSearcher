@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:repo_searcher/providers/homeProviders.dart';
 import 'package:repo_searcher/providers/dataProviders.dart';
 
 import 'package:repo_searcher/modules/itemList.dart';
+import 'package:repo_searcher/modules/itemPagenation.dart';
 
 class Results extends ConsumerWidget {
   Results({super.key});
@@ -16,28 +18,32 @@ class Results extends ConsumerWidget {
       error: (e, s) => Center(child: Text('エラー $e')),
       data: (d) => Center(child: ItemList(context, d)),
     );
-
-    final resInfo = ref.watch(responseNotifierProvider); // dataNotifierProviderで件数の取得等は行った。
+    final int resInfo = ref.watch(repoCountNotifierProvider); // dataNotifierProviderで件数の取得等は行った。
+    final inputField = ref.watch(searchFieldNotifierProvider); // Pagenation制御のために必要。
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Total: ${resInfo["count"]} Repositories'),
+        title: Text('Total: $resInfo Repositories'),
         leading: IconButton(
         icon: const Icon(Icons.arrow_back),
-        onPressed: () { // Homeに戻る際に情報をリセット
-          final resNotifier = ref.read(responseNotifierProvider.notifier);
+        onPressed: () {
+          final resNotifier = ref.read(repoCountNotifierProvider.notifier);
           final dataNotifier = ref.read(dataNotifierProvider.notifier);
+          final fieldNotifier = ref.read(searchFieldNotifierProvider.notifier);
           resNotifier.resetState();
           dataNotifier.resetState();
+          fieldNotifier.resetPageState();
           Navigator.pop(context);
         },
       )
       ),
       body: itemListModule,
+      
+      bottomNavigationBar: PagenationList(
+        ref, int.parse(inputField["page"]), int.parse(inputField["per_page"]), resInfo),
 
-      floatingActionButton: FloatingActionButton( //仮
+      floatingActionButton: FloatingActionButton(
         onPressed: (){
-          
         },
         child: const Icon(Icons.sync),
       ),
