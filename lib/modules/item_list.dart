@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:repo_searcher/modules/itemCard.dart';
+import 'package:repo_searcher/modules/item_card.dart';
 
 Widget ItemList(context, d) {
   if (d.length != 0){

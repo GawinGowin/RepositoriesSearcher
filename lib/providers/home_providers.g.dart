@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'homeProviders.dart';
+part of 'home_providers.dart';
 
 // **************************************************************************
 // RiverpodGenerator
@@ -22,7 +22,7 @@ final pageNotifierProvider =
 
 typedef _$PageNotifier = AutoDisposeNotifier<int>;
 String _$searchFieldNotifierHash() =>
-    r'b809744f51b657396239937e227e772fb25b8d11';
+    r'771d1c72364f236cc1aa91c1f67fae27e1f23a9c';
 
 /// See also [SearchFieldNotifier].
 @ProviderFor(SearchFieldNotifier)

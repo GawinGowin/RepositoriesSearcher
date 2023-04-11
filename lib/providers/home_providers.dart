@@ -1,7 +1,6 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'homeProviders.g.dart';
+part 'home_providers.g.dart';
 
 //RootPage
 @riverpod
@@ -22,7 +21,7 @@ class SearchFieldNotifier extends _$SearchFieldNotifier {
         "q":"",
         "sort":"",
         "order":"",
-        "per_page":"100",
+        "per_page":"30",
         "page":"1",
       };  
 

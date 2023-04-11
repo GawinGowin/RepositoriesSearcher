@@ -1,11 +1,10 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
-import 'package:repo_searcher/utils/responseData.dart';
-import 'package:repo_searcher/providers/homeProviders.dart';
-part 'dataProviders.g.dart';
+import 'package:repo_searcher/utils/response_data.dart';
+import 'package:repo_searcher/providers/home_providers.dart';
+part 'data_providers.g.dart';
 
 //flutter pub run build_runner watch --delete-conflicting-outputs
 
@@ -29,7 +28,7 @@ class DataNotifier extends _$DataNotifier {
     List items = responseJson["items"];
     List formedItems = items.map((e) => cleanData(e)).toList();
     return formedItems;
-  }
+  }  
   
   void resetState() async {
     state = const AsyncValue.loading();
@@ -51,9 +50,6 @@ class RepoCountNotifier extends _$RepoCountNotifier {
     state = 0;
   }  
 }
-
-//Todo
-final paginationProvider = StateProvider((ref) => 1);
 
 dynamic checkResponse(http.Response response) {
   switch (response.statusCode) {

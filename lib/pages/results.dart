@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:repo_searcher/providers/homeProviders.dart';
-import 'package:repo_searcher/providers/dataProviders.dart';
+import 'package:repo_searcher/providers/home_providers.dart';
+import 'package:repo_searcher/providers/data_providers.dart';
 
-import 'package:repo_searcher/modules/itemList.dart';
-import 'package:repo_searcher/modules/itemPagenation.dart';
+import 'package:repo_searcher/modules/item_list.dart';
+import 'package:repo_searcher/modules/item_pagenation.dart';
 
 class Results extends ConsumerWidget {
   Results({super.key});
