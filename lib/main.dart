@@ -23,11 +23,11 @@ class RootPage extends ConsumerWidget {
     const items = [
       BottomNavigationBarItem(
         icon: Icon(Icons.home),
-        label:"Home"
+        label:"ホーム"
         ),
       BottomNavigationBarItem(
         icon: Icon(Icons.settings),
-        label:"Settings"
+        label:"オプション"
         ),  
     ];
 
