@@ -96,7 +96,6 @@ TableRow tablePartial(Widget key, Widget value){
     children: [
       Container(
         margin: const EdgeInsets.symmetric(vertical: 4),
-
         child: Center(child: key)
       ),
       Container(

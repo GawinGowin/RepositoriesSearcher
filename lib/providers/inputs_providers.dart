@@ -1,6 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'home_providers.g.dart';
+part 'inputs_providers.g.dart';
 
 //RootPage
 @riverpod
@@ -50,12 +50,12 @@ class SearchFieldNotifier extends _$SearchFieldNotifier {
 class AlertMsgNotifier extends _$AlertMsgNotifier {
   @override
   bool build() {
-    return true;
+    return false;
   }
-  void setState() {
+  void deactivateState() {
     state = false;
   }
-  void resetState() {
+  void activateState() {
     state = true;
   }  
 }

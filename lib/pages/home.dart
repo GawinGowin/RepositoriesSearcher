@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import 'package:repo_searcher/providers/home_providers.dart';
+import 'package:repo_searcher/providers/inputs_providers.dart';
 import 'package:repo_searcher/pages/results.dart';
 
 
@@ -12,12 +12,14 @@ class Home extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final inputField = ref.watch(searchFieldNotifierProvider);
+    final alertCheck = ref.watch(alertMsgNotifierProvider);
+
     final copyInputField = {...inputField};
     
     final textEditingController = useTextEditingController();
     final focusNode = useFocusNode();
     
-    nextPage () => MaterialPageRoute(builder: (context){return Results();});
+    nextPage () => MaterialPageRoute(builder: (context){return const Results();});
 
     return Scaffold(
       appBar: AppBar(
@@ -41,26 +43,24 @@ class Home extends HookConsumerWidget {
                   icon: const Icon(Icons.clear),
                   onPressed: () {
                     textEditingController.clear();
-                    final notifier = ref.read(searchFieldNotifierProvider.notifier);
-                    notifier.clearTextState();
+                    ref.read(searchFieldNotifierProvider.notifier).clearTextState();
                   },
                 )
               ),
 
               onChanged: (text){
                 copyInputField["q"] = text;
-                final notifier = ref.read(searchFieldNotifierProvider.notifier);
-                notifier.updateState(copyInputField);
+                ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
               },
-              onSubmitted: inputField["q"] == "" ? null : (_){Navigator.push(context, nextPage());},
+              onSubmitted: inputField["q"] == "" ? null : (_){
+                ref.read(alertMsgNotifierProvider.notifier).activateState();
+                Navigator.push(context, nextPage());
+                },
             ),
             ElevatedButton(
                 onPressed: inputField["q"] == "" ? null :(){
-                  Navigator.push(
-                    context,
-                    nextPage()
-                  );
-                print(inputField);
+                  ref.read(alertMsgNotifierProvider.notifier).activateState();
+                  Navigator.push(context, nextPage());
                 },
                 child: const Text("search"),
               ),

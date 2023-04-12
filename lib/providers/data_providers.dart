@@ -6,20 +6,18 @@ import 'dart:convert';
 import 'package:yaml/yaml.dart';
 
 import 'package:repo_searcher/utils/response_data.dart';
-import 'package:repo_searcher/providers/home_providers.dart';
+import 'package:repo_searcher/providers/inputs_providers.dart';
 part 'data_providers.g.dart';
 
 //flutter pub run build_runner watch --delete-conflicting-outputs
 
+const String host = "api.github.com";
+const String path = '/search/repositories';
+
 @riverpod
 class DataNotifier extends _$DataNotifier {
-  // Todo refuctor
-  //AsyncNotifierのbuild()メソッド内でref.watchおよびref.readの使用が推奨されないため
   @override
   Future<List> build() async {
-    const String host = "api.github.com";
-    const String path = '/search/repositories';
-
     var header = await loadHeader();
 
     final inputField = ref.watch(searchFieldNotifierProvider);
@@ -62,16 +60,10 @@ dynamic checkResponse(http.Response response) {
   switch (response.statusCode) {
     case 200:
       return jsonDecode(response.body);
-    case 400:
-      throw Exception('400');
-    case 401:
-      throw Exception('401');
     case 403:
       throw Exception('レート制限です。時間を置いてリトライしてください。');
     case 404:
       throw Exception('404 Not Found');
-    case 500:
-      throw Exception('500');
     default:
       throw Exception('検索ごとに最大 1,000 件の結果が取得可能です。');
   }

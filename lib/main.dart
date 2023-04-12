@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:repo_searcher/providers/home_providers.dart';
+import 'package:repo_searcher/providers/inputs_providers.dart';
 
 import 'package:repo_searcher/pages/home.dart';
 import 'package:repo_searcher/pages/settings.dart';
@@ -42,8 +42,7 @@ class RootPage extends ConsumerWidget {
           items: items,
           currentIndex: index,
           onTap: (indexTap){
-            final notifier = ref.read(pageNotifierProvider.notifier);
-            notifier.updateState(indexTap);
+            ref.read(pageNotifierProvider.notifier).updateState(indexTap);
           },
         )
     );
