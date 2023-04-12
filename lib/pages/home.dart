@@ -12,6 +12,8 @@ class Home extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final inputField = ref.watch(searchFieldNotifierProvider);
+    final alertCheck = ref.watch(alertMsgNotifierProvider);
+
     final copyInputField = {...inputField};
     
     final textEditingController = useTextEditingController();
@@ -50,15 +52,15 @@ class Home extends HookConsumerWidget {
                 copyInputField["q"] = text;
                 ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
               },
-              onSubmitted: inputField["q"] == "" ? null : (_){Navigator.push(context, nextPage());},
+              onSubmitted: inputField["q"] == "" ? null : (_){
+                ref.read(alertMsgNotifierProvider.notifier).activateState();
+                Navigator.push(context, nextPage());
+                },
             ),
             ElevatedButton(
                 onPressed: inputField["q"] == "" ? null :(){
-                  Navigator.push(
-                    context,
-                    nextPage()
-                  );
-                debugPrint("$inputField");
+                  ref.read(alertMsgNotifierProvider.notifier).activateState();
+                  Navigator.push(context, nextPage());
                 },
                 child: const Text("search"),
               ),

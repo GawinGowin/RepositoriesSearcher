@@ -50,12 +50,12 @@ class SearchFieldNotifier extends _$SearchFieldNotifier {
 class AlertMsgNotifier extends _$AlertMsgNotifier {
   @override
   bool build() {
-    return true;
+    return false;
   }
-  void setState() {
+  void deactivateState() {
     state = false;
   }
-  void resetState() {
+  void activateState() {
     state = true;
   }  
 }

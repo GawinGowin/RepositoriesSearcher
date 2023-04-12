@@ -7,7 +7,7 @@ import 'package:repo_searcher/providers/data_providers.dart';
 import 'package:repo_searcher/modules/item_list.dart';
 import 'package:repo_searcher/modules/item_pagenation.dart';
 
-class Results extends ConsumerWidget {
+class Results extends HookConsumerWidget {
   const Results({super.key});
   
   @override
@@ -19,12 +19,14 @@ class Results extends ConsumerWidget {
       data: (d) => Center(child: ItemList(context, d)), //結果をレイアウトしたWidget
     );
     final int count = ref.watch(repoCountNotifierProvider); // dataNotifierProviderで取得した検索結果の件数を取得
-    
     final alertCheck = ref.watch(alertMsgNotifierProvider);
+
     if (alertCheck && count > 1000){
-      const snackBar = SnackBar(content: Text('検索ごとに最大1,000件の結果を提供しています。'), duration: Duration(seconds: 1),);
+      const snackBar = SnackBar(content: Text('検索ごとに最大1,000件の結果を提供しています。'), duration: Duration(seconds: 2),);
       Future.delayed(const Duration(seconds: 0), () {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        ref.read(alertMsgNotifierProvider.notifier).deactivateState();
+        debugPrint("Hey");
       });
     }
 
@@ -37,7 +39,6 @@ class Results extends ConsumerWidget {
           ref.read(repoCountNotifierProvider.notifier).resetState();
           ref.read(dataNotifierProvider.notifier).resetState();
           ref.read(searchFieldNotifierProvider.notifier).resetPageState();
-          ref.read(alertMsgNotifierProvider.notifier).resetState();
           Navigator.pop(context);
         },
       )
