@@ -18,6 +18,9 @@ class SettingPanel extends ConsumerWidget {
 
     debugPrint("$inputField");
 
+    List<String> sortTypes = ["", "stars", "forks", "help-wanted-issues", "updated"];
+    Map<String,String> orderTypes = {"降順":"desc", "昇順":"asc"};
+
     return SingleChildScrollView(
       child: Column(
         children: [
@@ -31,41 +34,14 @@ class SettingPanel extends ConsumerWidget {
             child: Wrap(
               alignment: WrapAlignment.spaceEvenly,
               children: [
-                OutlinedButton(
-                  onPressed: () {
-                    copyInputField["sort"] = "";
-                    ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
-                  },
-                  child: const Text('best match'),
-                ),
-                OutlinedButton(
-                  onPressed: () {
-                    copyInputField["sort"] = "stars";
-                    ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
-                  },
-                  child: const Text('stars'),
-                ),
-                OutlinedButton(
-                  onPressed: () {
-                    copyInputField["sort"] = "forks";
-                    ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
-                  },
-                  child: const Text('forks'),
-                ),
-                OutlinedButton(
-                  onPressed: () {
-                    copyInputField["sort"] = "help-wanted-issues";
-                    ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
-                  },
-                  child: const Text('help-wanted-issues'),
-                ),
-                OutlinedButton(
-                  onPressed: () {
-                    copyInputField["sort"] = "updated";
-                    ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
-                  },
-                  child: const Text('updated')
-                ),
+                for (final sortName in sortTypes)
+                  OutlinedButton(
+                    onPressed: () {
+                      copyInputField["sort"] = sortName;
+                      ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
+                    },
+                    child: const Text('best match'),
+                  ),
               ],          
             ),
           ),
@@ -78,20 +54,14 @@ class SettingPanel extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              OutlinedButton(
-                onPressed: () {
-                  copyInputField["order"] = "desc";
-                  ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
-                },
-                child: const Text('降順'),
-              ),
-              OutlinedButton(
-                onPressed: () {
-                  copyInputField["order"] = "asc";
-                  ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
-                },
-                child: const Text('昇順'),
-              ),
+              for (final orderKey in orderTypes.keys)
+                OutlinedButton(
+                  onPressed: () {
+                    copyInputField["order"] = orderTypes[orderKey];
+                    ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
+                  },
+                  child: Text(orderKey),
+                ),
           ],),
 
           ListTile(
