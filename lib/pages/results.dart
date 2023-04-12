@@ -22,7 +22,7 @@ class Results extends HookConsumerWidget {
     final alertCheck = ref.watch(alertMsgNotifierProvider);
 
     if (alertCheck && count > 1000){
-      const snackBar = SnackBar(content: Text('検索ごとに最大1,000件の結果を提供しています。'), duration: Duration(seconds: 2),);
+      const snackBar = SnackBar(content: Text('提供できるのは上位1,000件です。'), duration: Duration(seconds: 2),);
       Future.delayed(const Duration(seconds: 0), () {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         ref.read(alertMsgNotifierProvider.notifier).deactivateState();
@@ -30,23 +30,31 @@ class Results extends HookConsumerWidget {
       });
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Total: $count Repositories'),
-        leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () {
-          ref.read(repoCountNotifierProvider.notifier).resetState();
-          ref.read(dataNotifierProvider.notifier).resetState();
-          ref.read(searchFieldNotifierProvider.notifier).resetPageState();
-          Navigator.pop(context);
-        },
-      )
-      ),
-      body: itemListModule,
+    return WillPopScope(
+      onWillPop: () async {
+        ref.read(repoCountNotifierProvider.notifier).resetState();
+        ref.read(dataNotifierProvider.notifier).resetState();
+        ref.read(searchFieldNotifierProvider.notifier).resetPageState();
+        Navigator.pop(context);
+        return false;
+      },
 
-      bottomNavigationBar: BottomPagenation(totalReposCount: count)
-
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Total: $count Repositories'),
+          leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            ref.read(repoCountNotifierProvider.notifier).resetState();
+            ref.read(dataNotifierProvider.notifier).resetState();
+            ref.read(searchFieldNotifierProvider.notifier).resetPageState();
+            Navigator.pop(context);
+          },
+        )
+        ),
+        body: itemListModule,
+        bottomNavigationBar: BottomPagenation(totalReposCount: count)
+      )      
     );
   }
 }

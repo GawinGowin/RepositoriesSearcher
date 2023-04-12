@@ -1,6 +1,33 @@
 import 'package:flutter/material.dart';
 
 Widget ItemCard(context, index, itemList) {
+  
+  List<Widget> descriptionCol = [
+    Container(margin: const EdgeInsets.all(15),
+    child : const Text("No description"))
+  ];
+
+  if(itemList[index].description != ""){
+    descriptionCol = [
+      Container(
+        margin: const EdgeInsets.only(top: 5),
+        alignment: Alignment.centerLeft,
+        child: const Text('description')
+      ),
+
+      Container(
+        width: double.infinity,
+        padding: const EdgeInsets.only(top: 5),
+        decoration: const BoxDecoration(
+          border: Border(
+            top: BorderSide(color: Colors.grey)
+          ),
+        ),
+        child: Text('${itemList[index].description}')
+      )
+    ];
+  }
+
   return Card(
     child: ListTile(
       title: Text('${itemList[index].name}'),
@@ -58,23 +85,8 @@ Widget ItemCard(context, index, itemList) {
                     ),       
                   ],
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 5),
-                  alignment: Alignment.centerLeft,
-                  child: const Text('description')
-                ),
-          
-                Container(
-                  width: double.infinity,
-                  padding: const EdgeInsets.only(top: 5),
-                  decoration: const BoxDecoration(
-                    border: Border(
-                      top: BorderSide(color: Colors.grey)
-                    ),
-                  ),
-                  child: Text('${itemList[index].description}')
+                Column(children: descriptionCol,
                 )
-          
               ],
             ),
           ),

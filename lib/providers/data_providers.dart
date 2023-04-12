@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:yaml/yaml.dart';
 
-import 'package:repo_searcher/utils/response_data.dart';
+import 'package:repo_searcher/schemas/response_data.dart';
 import 'package:repo_searcher/providers/inputs_providers.dart';
 part 'data_providers.g.dart';
 

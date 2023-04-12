@@ -12,7 +12,7 @@ class Home extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final inputField = ref.watch(searchFieldNotifierProvider);
-    final alertCheck = ref.watch(alertMsgNotifierProvider);
+    ref.watch(alertMsgNotifierProvider);
 
     final copyInputField = {...inputField};
     
@@ -21,51 +21,56 @@ class Home extends HookConsumerWidget {
     
     nextPage () => MaterialPageRoute(builder: (context){return const Results();});
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('ホーム'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            TextField(
-              maxLines: 1,
-              maxLength: 256, //根拠：https://docs.github.com/ja/rest/search?apiVersion=2022-11-28#limitations-on-query-length
-              focusNode: focusNode,
-              controller: textEditingController,
-              
-              decoration: InputDecoration(
-                border: const OutlineInputBorder(),
-                labelText: "Search",
-                suffixIcon: IconButton(
-                  icon: const Icon(Icons.clear),
-                  onPressed: () {
-                    textEditingController.clear();
-                    ref.read(searchFieldNotifierProvider.notifier).clearTextState();
-                  },
-                )
-              ),
+    return GestureDetector(
+      onTap: () {
+        focusNode.unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('ホーム'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              TextField(
+                maxLines: 1,
+                maxLength: 256, //根拠：https://docs.github.com/ja/rest/search?apiVersion=2022-11-28#limitations-on-query-length
+                focusNode: focusNode,
+                controller: textEditingController,
+                
+                decoration: InputDecoration(
+                  border: const OutlineInputBorder(),
+                  labelText: "Search",
+                  suffixIcon: IconButton(
+                    icon: const Icon(Icons.clear),
+                    onPressed: () {
+                      textEditingController.clear();
+                      ref.read(searchFieldNotifierProvider.notifier).clearTextState();
+                    },
+                  )
+                ),
 
-              onChanged: (text){
-                copyInputField["q"] = text;
-                ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
-              },
-              onSubmitted: inputField["q"] == "" ? null : (_){
-                ref.read(alertMsgNotifierProvider.notifier).activateState();
-                Navigator.push(context, nextPage());
+                onChanged: (text){
+                  copyInputField["q"] = text;
+                  ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
                 },
-            ),
-            ElevatedButton(
-                onPressed: inputField["q"] == "" ? null :(){
+                onSubmitted: inputField["q"] == "" ? null : (_){
                   ref.read(alertMsgNotifierProvider.notifier).activateState();
                   Navigator.push(context, nextPage());
-                },
-                child: const Text("search"),
+                  },
               ),
-          ],
-        ),
+              ElevatedButton(
+                  onPressed: inputField["q"] == "" ? null :(){
+                    ref.read(alertMsgNotifierProvider.notifier).activateState();
+                    Navigator.push(context, nextPage());
+                  },
+                  child: const Text("search"),
+                ),
+            ],
+          ),
+        )
       )
     );
   }
