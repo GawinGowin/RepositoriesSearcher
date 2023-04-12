@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:yaml/yaml.dart';
 
 import 'package:repo_searcher/utils/response_data.dart';
-import 'package:repo_searcher/providers/home_providers.dart';
+import 'package:repo_searcher/providers/inputs_providers.dart';
 part 'data_providers.g.dart';
 
 //flutter pub run build_runner watch --delete-conflicting-outputs

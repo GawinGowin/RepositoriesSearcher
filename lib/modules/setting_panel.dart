@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:repo_searcher/providers/home_providers.dart';
+import 'package:repo_searcher/providers/inputs_providers.dart';
 
 class SettingPanel extends ConsumerWidget {
   const SettingPanel({super.key});
