@@ -18,11 +18,10 @@ class Results extends ConsumerWidget {
       error: (e, s) => Center(child: Text('$e')),
       data: (d) => Center(child: ItemList(context, d)),
     );
-    final int totalRepos = ref.watch(repoCountNotifierProvider); // dataNotifierProviderで件数の取得等は行った。
-    final inputField = ref.watch(searchFieldNotifierProvider); // Pagenation制御のために必要。
+    final int count = ref.watch(repoCountNotifierProvider); // dataNotifierProviderで取得した検索結果の件数を取得
     final alertCheck = ref.watch(alertMsgNotifierProvider);
 
-    if (alertCheck && totalRepos > 1000){
+    if (alertCheck && count > 1000){
       const snackBar = SnackBar(content: Text('検索ごとに最大1,000件の結果を提供しています。'));
       Future.delayed(const Duration(seconds: 0), () {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -31,7 +30,7 @@ class Results extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Total: $totalRepos Repositories'),
+        title: Text('Total: $count Repositories'),
         leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
@@ -49,10 +48,8 @@ class Results extends ConsumerWidget {
       ),
       body: itemListModule,
 
-      bottomNavigationBar: PagenationList(
-        ref, int.parse(inputField["page"]), int.parse(inputField["per_page"]), totalRepos
-        // リファクタリングの余地あり。inputField["page"]などはPagenationList内部でも取得できる。
-      ),
+      bottomNavigationBar: BottomPagenation(totalReposCount: count)
+
     );
   }
 }
