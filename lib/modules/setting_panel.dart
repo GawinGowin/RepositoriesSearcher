@@ -26,7 +26,7 @@ class SettingPanel extends ConsumerWidget {
             trailing: Text(sort),
           ),
 
-          Container(
+          SizedBox(
             width: double.infinity,
             child: Wrap(
               alignment: WrapAlignment.spaceEvenly,

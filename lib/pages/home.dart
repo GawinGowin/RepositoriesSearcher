@@ -17,7 +17,7 @@ class Home extends HookConsumerWidget {
     final textEditingController = useTextEditingController();
     final focusNode = useFocusNode();
     
-    nextPage () => MaterialPageRoute(builder: (context){return Results();});
+    nextPage () => MaterialPageRoute(builder: (context){return const Results();});
 
     return Scaffold(
       appBar: AppBar(
@@ -58,7 +58,7 @@ class Home extends HookConsumerWidget {
                     context,
                     nextPage()
                   );
-                print(inputField);
+                debugPrint("$inputField");
                 },
                 child: const Text("search"),
               ),
