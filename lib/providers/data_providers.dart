@@ -11,15 +11,19 @@ part 'data_providers.g.dart';
 
 //flutter pub run build_runner watch --delete-conflicting-outputs
 
+const String host = "api.github.com";
+const String path = '/search/repositories';
+
 @riverpod
 class DataNotifier extends _$DataNotifier {
   // Todo refuctor
   //AsyncNotifierのbuild()メソッド内でref.watchおよびref.readの使用が推奨されないため
+  //->ChatGPTによる回答
+
+  //https://riverpod.dev/ja/docs/concepts/combining_providers において
+  //FutureProviderの内部でref.watchを使用しているため、一時保留とする。
   @override
   Future<List> build() async {
-    const String host = "api.github.com";
-    const String path = '/search/repositories';
-
     var header = await loadHeader();
 
     final inputField = ref.watch(searchFieldNotifierProvider);
