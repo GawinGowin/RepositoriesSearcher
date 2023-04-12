@@ -12,15 +12,15 @@ class Results extends ConsumerWidget {
   
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final itemList = ref.watch(dataNotifierProvider); 
+    final itemList = ref.watch(dataNotifierProvider); //ここで検索結果を取得
     final itemListModule = itemList.when(
-      loading: () => const Center(child: CircularProgressIndicator(),),
-      error: (e, s) => Center(child: Text('$e')),
-      data: (d) => Center(child: ItemList(context, d)),
+      loading: () => const Center(child: CircularProgressIndicator(),), //結果が得られるまでは読み込みアニメーション
+      error: (e, s) => Center(child: Text('$e')), //エラーが発生したら、テキスト
+      data: (d) => Center(child: ItemList(context, d)), //結果をレイアウトしたWidget
     );
     final int count = ref.watch(repoCountNotifierProvider); // dataNotifierProviderで取得した検索結果の件数を取得
+    
     final alertCheck = ref.watch(alertMsgNotifierProvider);
-
     if (alertCheck && count > 1000){
       const snackBar = SnackBar(content: Text('検索ごとに最大1,000件の結果を提供しています。'));
       Future.delayed(const Duration(seconds: 0), () {
