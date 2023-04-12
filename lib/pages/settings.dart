@@ -11,25 +11,31 @@ class Settings extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Settings'),
       ),
-      body: Container(
-        //color: Colors.red,
-        margin: const EdgeInsets.all(15),
-
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
-              margin: const EdgeInsets.all(5),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                '検索オプション',
-                style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.6),
-              ),
-            ),
-            const SettingPanel(),
+              //color: Colors.red,
+              margin: const EdgeInsets.all(15),
 
-        ]),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.all(5),
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      '検索オプション',
+                      style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.6),
+                    ),
+                  ),
+                  const SettingPanel(),
+
+              ]),
+              )
+          ],
         )
+      ),
     );
   }
 }

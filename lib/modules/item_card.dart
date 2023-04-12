@@ -41,20 +41,22 @@ Widget ItemCard(context, index, itemList) {
       onTap: () => showDialog<String>(
         context: context,
         builder: (BuildContext context) => AlertDialog(
-
-          title: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                  color: Colors.black,
-                  width: 2
-              ),
-            ),
-            child: Image.network('${itemList[index].avatar_url}',)
-          ),
-
           content: SingleChildScrollView(
             child: Column(
-              children: [   
+              children: [
+                Container(
+                  constraints: const BoxConstraints(
+                    maxWidth: 150,
+                  ),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                        color: Colors.black,
+                        width: 2
+                    ),
+                  ),
+                  child: Image.network('${itemList[index].avatar_url}',)
+                ),
+
                 Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   child: Text(
