@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:path/path.dart' as path;
 
 Widget ItemCard(context, index, itemList) {
   
@@ -60,7 +62,6 @@ Widget ItemCard(context, index, itemList) {
                     style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.4),
                   ),
                 ),
-                // https://primer.style/design/foundations/icons/
                 Table(
                   children: [
                     tablePartial(
@@ -68,19 +69,19 @@ Widget ItemCard(context, index, itemList) {
                       Text('${itemList[index].language=="" ? "None": itemList[index].language}')
                     ),                      
                     tablePartial(
-                      const Icon(Icons.star_border),
+                      loadIcon("assets/icons/star.svg"),
                       Text('${itemList[index].stargazers_count}'),
                     ),
                     tablePartial(
-                      const Icon(Icons.visibility),
+                      loadIcon("assets/icons/eye.svg"),
                       Text('${itemList[index].watchers_count}')
                     ),
                     tablePartial(
-                      const Icon(Icons.lan_outlined),
+                      loadIcon("assets/icons/repo-forked.svg"),
                       Text('${itemList[index].forks_count}')
                     ),
                     tablePartial(
-                      const Icon(Icons.adjust),
+                      loadIcon("assets/icons/issue-opened.svg"),
                       Text('${itemList[index].open_issues_count}')
                     ),       
                   ],
@@ -116,4 +117,14 @@ TableRow tablePartial(Widget key, Widget value){
       ),
     ]
   );
+}
+
+Widget loadIcon(fPath){
+  String fileName = path.basenameWithoutExtension(fPath).split('.').first;
+  final Widget svg = SvgPicture.asset(
+    fPath,
+    semanticsLabel: fileName
+  );
+
+  return svg;
 }
