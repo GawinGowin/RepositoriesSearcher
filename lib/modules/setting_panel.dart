@@ -40,7 +40,7 @@ class SettingPanel extends ConsumerWidget {
                       copyInputField["sort"] = sortName;
                       ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
                     },
-                    child: const Text('best match'),
+                    child: Text(returnSortType(sortName)),
                   ),
               ],          
             ),
@@ -84,7 +84,7 @@ class SettingPanel extends ConsumerWidget {
   }
 }
 
-returnSortType(String text){
+String returnSortType(String text){
   switch (text){
     case "stars":
       return "スター数";
