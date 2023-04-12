@@ -30,23 +30,31 @@ class Results extends HookConsumerWidget {
       });
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Total: $count Repositories'),
-        leading: IconButton(
-        icon: const Icon(Icons.arrow_back),
-        onPressed: () {
-          ref.read(repoCountNotifierProvider.notifier).resetState();
-          ref.read(dataNotifierProvider.notifier).resetState();
-          ref.read(searchFieldNotifierProvider.notifier).resetPageState();
-          Navigator.pop(context);
-        },
-      )
-      ),
-      body: itemListModule,
+    return WillPopScope(
+      onWillPop: () async {
+        ref.read(repoCountNotifierProvider.notifier).resetState();
+        ref.read(dataNotifierProvider.notifier).resetState();
+        ref.read(searchFieldNotifierProvider.notifier).resetPageState();
+        Navigator.pop(context);
+        return false;
+      },
 
-      bottomNavigationBar: BottomPagenation(totalReposCount: count)
-
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('Total: $count Repositories'),
+          leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            ref.read(repoCountNotifierProvider.notifier).resetState();
+            ref.read(dataNotifierProvider.notifier).resetState();
+            ref.read(searchFieldNotifierProvider.notifier).resetPageState();
+            Navigator.pop(context);
+          },
+        )
+        ),
+        body: itemListModule,
+        bottomNavigationBar: BottomPagenation(totalReposCount: count)
+      )      
     );
   }
 }
