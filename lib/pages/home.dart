@@ -12,7 +12,7 @@ class Home extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final inputField = ref.watch(searchFieldNotifierProvider);
-    final alertCheck = ref.watch(alertMsgNotifierProvider);
+    ref.watch(alertMsgNotifierProvider);
 
     final copyInputField = {...inputField};
     
