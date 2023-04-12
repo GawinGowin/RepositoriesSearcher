@@ -62,16 +62,10 @@ dynamic checkResponse(http.Response response) {
   switch (response.statusCode) {
     case 200:
       return jsonDecode(response.body);
-    case 400:
-      throw Exception('400');
-    case 401:
-      throw Exception('401');
     case 403:
       throw Exception('レート制限です。時間を置いてリトライしてください。');
     case 404:
       throw Exception('404 Not Found');
-    case 500:
-      throw Exception('500');
     default:
       throw Exception('検索ごとに最大 1,000 件の結果が取得可能です。');
   }
