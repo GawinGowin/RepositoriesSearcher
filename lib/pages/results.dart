@@ -34,14 +34,10 @@ class Results extends ConsumerWidget {
         leading: IconButton(
         icon: const Icon(Icons.arrow_back),
         onPressed: () {
-          final resNotifier = ref.read(repoCountNotifierProvider.notifier);
-          final dataNotifier = ref.read(dataNotifierProvider.notifier);
-          final fieldNotifier = ref.read(searchFieldNotifierProvider.notifier);
-          final alertNotifier = ref.read(alertMsgNotifierProvider.notifier);
-          resNotifier.resetState();
-          dataNotifier.resetState();
-          fieldNotifier.resetPageState();
-          alertNotifier.resetState();
+          ref.read(repoCountNotifierProvider.notifier).resetState();
+          ref.read(dataNotifierProvider.notifier).resetState();
+          ref.read(searchFieldNotifierProvider.notifier).resetPageState();
+          ref.read(alertMsgNotifierProvider.notifier).resetState();
           Navigator.pop(context);
         },
       )

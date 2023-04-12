@@ -21,7 +21,8 @@ class DataNotifier extends _$DataNotifier {
   //->ChatGPTによる回答
 
   //https://riverpod.dev/ja/docs/concepts/combining_providers において
-  //FutureProviderの内部でref.watchを使用しているため、一時保留とする。
+  //FutureProviderの内部でref.watchを使用している。
+  
   @override
   Future<List> build() async {
     var header = await loadHeader();

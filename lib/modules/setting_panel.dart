@@ -34,40 +34,35 @@ class SettingPanel extends ConsumerWidget {
                 OutlinedButton(
                   onPressed: () {
                     copyInputField["sort"] = "";
-                    final notifier = ref.read(searchFieldNotifierProvider.notifier);
-                    notifier.updateState(copyInputField);
+                    ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
                   },
                   child: const Text('best match'),
                 ),
                 OutlinedButton(
                   onPressed: () {
                     copyInputField["sort"] = "stars";
-                    final notifier = ref.read(searchFieldNotifierProvider.notifier);
-                    notifier.updateState(copyInputField);
+                    ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
                   },
                   child: const Text('stars'),
                 ),
                 OutlinedButton(
                   onPressed: () {
                     copyInputField["sort"] = "forks";
-                    final notifier = ref.read(searchFieldNotifierProvider.notifier);
-                    notifier.updateState(copyInputField);
+                    ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
                   },
                   child: const Text('forks'),
                 ),
                 OutlinedButton(
                   onPressed: () {
                     copyInputField["sort"] = "help-wanted-issues";
-                    final notifier = ref.read(searchFieldNotifierProvider.notifier);
-                    notifier.updateState(copyInputField);
+                    ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
                   },
                   child: const Text('help-wanted-issues'),
                 ),
                 OutlinedButton(
                   onPressed: () {
                     copyInputField["sort"] = "updated";
-                    final notifier = ref.read(searchFieldNotifierProvider.notifier);
-                    notifier.updateState(copyInputField);
+                    ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
                   },
                   child: const Text('updated')
                 ),
@@ -86,16 +81,14 @@ class SettingPanel extends ConsumerWidget {
               OutlinedButton(
                 onPressed: () {
                   copyInputField["order"] = "desc";
-                  final notifier = ref.read(searchFieldNotifierProvider.notifier);
-                  notifier.updateState(copyInputField);
+                  ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
                 },
                 child: const Text('降順'),
               ),
               OutlinedButton(
                 onPressed: () {
                   copyInputField["order"] = "asc";
-                  final notifier = ref.read(searchFieldNotifierProvider.notifier);
-                  notifier.updateState(copyInputField);
+                  ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
                 },
                 child: const Text('昇順'),
               ),
@@ -110,8 +103,7 @@ class SettingPanel extends ConsumerWidget {
             value: perPage,
             onChanged: (double value){
               copyInputField["per_page"] = "${value.toInt()}";
-              final notifier = ref.read(searchFieldNotifierProvider.notifier);
-              notifier.updateState(copyInputField);
+              ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
             },
             min: 1,
             max: 100,

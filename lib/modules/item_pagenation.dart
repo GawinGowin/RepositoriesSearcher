@@ -20,11 +20,9 @@ class BottomPagenation extends ConsumerWidget {
       onPressedFunction(){
         final copyInputField = {...inputField};
         copyInputField["page"] = "$number";
-        final fieldnotifier = ref.read(searchFieldNotifierProvider.notifier);
-        fieldnotifier.updateState(copyInputField);   
+        ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
 
-        final alertNotifier = ref.read(alertMsgNotifierProvider.notifier);
-        alertNotifier.setState();
+        ref.read(alertMsgNotifierProvider.notifier).setState();
       }
 
       if(now){

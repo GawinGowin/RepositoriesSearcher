@@ -41,16 +41,14 @@ class Home extends HookConsumerWidget {
                   icon: const Icon(Icons.clear),
                   onPressed: () {
                     textEditingController.clear();
-                    final notifier = ref.read(searchFieldNotifierProvider.notifier);
-                    notifier.clearTextState();
+                    ref.read(searchFieldNotifierProvider.notifier).clearTextState();
                   },
                 )
               ),
 
               onChanged: (text){
                 copyInputField["q"] = text;
-                final notifier = ref.read(searchFieldNotifierProvider.notifier);
-                notifier.updateState(copyInputField);
+                ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
               },
               onSubmitted: inputField["q"] == "" ? null : (_){Navigator.push(context, nextPage());},
             ),

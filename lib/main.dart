@@ -42,8 +42,7 @@ class RootPage extends ConsumerWidget {
           items: items,
           currentIndex: index,
           onTap: (indexTap){
-            final notifier = ref.read(pageNotifierProvider.notifier);
-            notifier.updateState(indexTap);
+            ref.read(pageNotifierProvider.notifier).updateState(indexTap);
           },
         )
     );
