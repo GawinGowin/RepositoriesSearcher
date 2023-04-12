@@ -21,7 +21,6 @@ class Settings extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(5),
               alignment: Alignment.centerLeft,
-              color: Colors.blue,
               child: Text(
                 '検索オプション',
                 style: DefaultTextStyle.of(context).style.apply(fontSizeFactor: 1.6),

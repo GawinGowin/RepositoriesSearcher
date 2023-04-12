@@ -19,7 +19,7 @@ class SearchFieldNotifier extends _$SearchFieldNotifier {
   Map<String, dynamic> initMap = <String, dynamic>{
         "q":"",
         "sort":"",
-        "order":"",
+        "order":"desc",
         "per_page":"30",
         "page":"1",
       };  
