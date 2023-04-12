@@ -7,7 +7,7 @@ Widget ItemCard(context, index, itemList) {
       subtitle: Text('${itemList[index].description}'),
       trailing: IconButton(
         icon: const Icon(Icons.open_in_new),
-        onPressed: () {print('${itemList[index].html_url}');},
+        onPressed: () {debugPrint('${itemList[index].html_url}');},
       ),
       onTap: () => showDialog<String>(
         context: context,

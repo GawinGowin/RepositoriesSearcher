@@ -13,7 +13,7 @@ class Home extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final inputField = ref.watch(searchFieldNotifierProvider);
     final copyInputField = {...inputField};
-  
+    
     final textEditingController = useTextEditingController();
     final focusNode = useFocusNode();
     
@@ -21,7 +21,7 @@ class Home extends HookConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('ホーム'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),

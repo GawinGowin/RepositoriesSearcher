@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'dart:math';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:repo_searcher/providers/home_providers.dart';
 
@@ -31,11 +33,12 @@ PagenationList(WidgetRef ref, int nowPage, int repoPerPage, int totalRepos){
   }
 
   const Widget more = Icon(Icons.more_horiz);
-  int totalPages = totalRepos ~/ repoPerPage + 1;
 
+  double totalPagesdouble = totalRepos / repoPerPage;
   if (totalRepos > 1000){
-    totalPages = 1000 ~/ repoPerPage + 1;
+    totalPagesdouble = 1000 / repoPerPage;   
   }
+  int totalPages = totalPagesdouble.ceil();
 
   List<Widget> pageList = [];
 
