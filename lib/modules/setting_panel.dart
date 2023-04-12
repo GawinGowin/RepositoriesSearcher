@@ -14,12 +14,12 @@ class SettingPanel extends ConsumerWidget {
     double perPage = double.parse(inputField["per_page"]);
     String order = inputField["order"];
     String orderShow = order=="desc"? "降順":"昇順";
-
     String sort = returnSortType(inputField["sort"]);
 
     debugPrint("$inputField");
 
-    return Column(
+    return SingleChildScrollView(
+      child: Column(
         children: [
           ListTile(
             title: const Text('Sort'),
@@ -117,7 +117,8 @@ class SettingPanel extends ConsumerWidget {
             max: 100,
             divisions: 99,
           ),
-      ],);
+      ],)
+    );
   }
 }
 
