@@ -16,7 +16,7 @@ class Results extends HookConsumerWidget {
     final itemListModule = itemList.when(
       loading: () => const Center(child: CircularProgressIndicator(),), //結果が得られるまでは読み込みアニメーション
       error: (e, s) => Center(child: Text('$e')), //エラーが発生したら、テキスト
-      data: (d) => Center(child: ItemList(context, d)), //結果をレイアウトしたWidget
+      data: (d) => Center(child: createList(context, d)), //結果をレイアウトしたWidget
     );
     final int count = ref.watch(repoCountNotifierProvider); // dataNotifierProviderで取得した検索結果の件数を取得
     final alertCheck = ref.watch(alertMsgNotifierProvider);

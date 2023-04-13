@@ -1,42 +1,63 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:path/path.dart' as path;
+import 'package:url_launcher/url_launcher.dart';
 
-Widget ItemCard(context, index, itemList) {
-  
-  List<Widget> descriptionCol = [
-    Container(margin: const EdgeInsets.all(15),
-    child : const Text("No description"))
-  ];
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:repo_searcher/providers/inputs_providers.dart';
 
-  if(itemList[index].description != ""){
-    descriptionCol = [
-      Container(
-        margin: const EdgeInsets.only(top: 5),
-        alignment: Alignment.centerLeft,
-        child: const Text('description')
-      ),
+//Widget ItemCard(context, index, itemList);
+class ItemCard extends ConsumerWidget {
+  const ItemCard({super.key, required this.index, required this.itemList});
+  final int index;
+  final List<dynamic> itemList;
 
-      Container(
-        width: double.infinity,
-        padding: const EdgeInsets.only(top: 5),
-        decoration: const BoxDecoration(
-          border: Border(
-            top: BorderSide(color: Colors.grey)
-          ),
-        ),
-        child: Text('${itemList[index].description}')
-      )
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    var modeNow = ref.watch(themeNotifierProvider.notifier).state;
+    if (modeNow == ThemeMode.system){
+      bool isDarkMode = WidgetsBinding.instance.window.platformBrightness == Brightness.dark;
+      modeNow = isDarkMode ? ThemeMode.dark : ThemeMode.light;
+    }
+
+    List<Widget> descriptionCol = [
+      Container(margin: const EdgeInsets.all(15),
+      child : const Text("No description"))
     ];
-  }
 
-  return Card(
+    if(itemList[index].description != ""){
+      descriptionCol = [
+        Container(
+          margin: const EdgeInsets.only(top: 5),
+          alignment: Alignment.centerLeft,
+          child: const Text('description')
+        ),
+
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.only(top: 5),
+          decoration: const BoxDecoration(
+            border: Border(
+              top: BorderSide(color: Colors.grey)
+            ),
+          ),
+          child: Text('${itemList[index].description}')
+        )
+      ];
+    }
+
+    return Card(
     child: ListTile(
       title: Text('${itemList[index].name}'),
       subtitle: Text('${itemList[index].description}'),
-      trailing: IconButton(
+      
+      trailing: IconButton(//外部ページ遷移
         icon: const Icon(Icons.open_in_new),
-        onPressed: () {debugPrint('${itemList[index].html_url}');},
+        onPressed: () {
+          debugPrint('${itemList[index].html_url}');
+          launchUrl(Uri.parse(itemList[index].html_url),);
+        },
+
       ),
       onTap: () => showDialog<String>(
         context: context,
@@ -71,19 +92,19 @@ Widget ItemCard(context, index, itemList) {
                       Text('${itemList[index].language=="" ? "None": itemList[index].language}')
                     ),                      
                     tablePartial(
-                      loadIcon("assets/icons/star.svg"),
+                      loadIcon("assets/icons/star.svg", modeNow),
                       Text('${itemList[index].stargazers_count}'),
                     ),
                     tablePartial(
-                      loadIcon("assets/icons/eye.svg"),
+                      loadIcon("assets/icons/eye.svg", modeNow),
                       Text('${itemList[index].watchers_count}')
                     ),
                     tablePartial(
-                      loadIcon("assets/icons/repo-forked.svg"),
+                      loadIcon("assets/icons/repo-forked.svg", modeNow),
                       Text('${itemList[index].forks_count}')
                     ),
                     tablePartial(
-                      loadIcon("assets/icons/issue-opened.svg"),
+                      loadIcon("assets/icons/issue-opened.svg", modeNow),
                       Text('${itemList[index].open_issues_count}')
                     ),       
                   ],
@@ -104,8 +125,9 @@ Widget ItemCard(context, index, itemList) {
       )
     )
   );
+  }
 }
-
+ 
 TableRow tablePartial(Widget key, Widget value){
   return TableRow(
     children: [
@@ -121,19 +143,19 @@ TableRow tablePartial(Widget key, Widget value){
   );
 }
 
-Widget loadIcon(fPath){
+Widget loadIcon(String fPath, mode){
   String fileName = path.basenameWithoutExtension(fPath).split('.').first;
   final Widget svg = SvgPicture.asset(
     fPath,
     semanticsLabel: fileName
   );
-  if (true){// ダークテーマ
+  if (mode==ThemeMode.dark){// ダークテーマ
     return ColorFiltered(
       colorFilter: const ColorFilter.matrix(<double>[
         -1,  0,  0, 0, 255,
-        0, -1,  0, 0, 255,
-        0,  0, -1, 0, 255,
-        0,  0,  0, 1,   0,
+         0, -1,  0, 0, 255,
+         0,  0, -1, 0, 255,
+         0,  0,  0, 1,   0,
       ]),
       child: svg,
     );

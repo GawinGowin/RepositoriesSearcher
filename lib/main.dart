@@ -8,10 +8,11 @@ import 'package:repo_searcher/pages/root.dart';
 import 'package:repo_searcher/themes/theme.dart';
 
 void main() {
-  runApp(ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: RepositoriesSearcher()));
 }
 
-class MyApp extends StatelessWidget {
+class RepositoriesSearcher extends StatelessWidget {
+  const RepositoriesSearcher({super.key});
   @override
   Widget build(BuildContext context) {
     return Consumer(

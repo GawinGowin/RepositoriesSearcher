@@ -9,7 +9,7 @@ class Settings extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var modeNow = ref.watch(themeNotifierProvider);
+    var modeNow = ref.watch(themeNotifierProvider.notifier).state;
     if (modeNow == ThemeMode.system){
       bool isDarkMode = WidgetsBinding.instance.window.platformBrightness == Brightness.dark;
       modeNow = isDarkMode ? ThemeMode.dark : ThemeMode.light;
