@@ -31,8 +31,8 @@ class Home extends HookConsumerWidget {
         ),
         body: Padding(
           padding: const EdgeInsets.all(20.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+          child: SingleChildScrollView(
+            child: Column(
             children: [
               TextField(
                 maxLines: 1,
@@ -50,28 +50,30 @@ class Home extends HookConsumerWidget {
                     },
                   )
                 ),
-
-                onChanged: (text){
-                  copyInputField["q"] = text;
-                  ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
+              onChanged: (text){
+                copyInputField["q"] = text;
+                ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
+              },
+              onSubmitted: inputField["q"] == "" ? null : (_){
+                ref.read(alertMsgNotifierProvider.notifier).activateState();
+                Navigator.push(context, nextPage());
                 },
-                onSubmitted: inputField["q"] == "" ? null : (_){
+              ),
+
+              ElevatedButton(
+                onPressed: inputField["q"] == "" ? null :(){
                   ref.read(alertMsgNotifierProvider.notifier).activateState();
                   Navigator.push(context, nextPage());
-                  },
+                },
+                child: const Text("search"),
               ),
-              ElevatedButton(
-                  onPressed: inputField["q"] == "" ? null :(){
-                    ref.read(alertMsgNotifierProvider.notifier).activateState();
-                    Navigator.push(context, nextPage());
-                  },
-                  child: const Text("search"),
-                ),
             ],
-          ),
+          ),)
         )
-      )
-    );
+
+          
+        )
+      );
   }
 }
 
