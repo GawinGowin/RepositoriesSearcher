@@ -6,7 +6,7 @@ import 'package:repo_searcher/providers/inputs_providers.dart';
 import 'package:repo_searcher/pages/home.dart';
 import 'package:repo_searcher/pages/settings.dart';
 
-main() async{
+void main() {
   const app = MaterialApp(home: RootPage());
   const scope = ProviderScope(
     child: app
