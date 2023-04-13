@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 
+// https://api.flutter.dev/flutter/material/ThemeData-class.html
 ThemeData lightThemeData = ThemeData();
 
 ThemeData darkThemeData = ThemeData(
     // Define the default brightness and colors.
     brightness: Brightness.dark,
-    primaryColor: Colors.lightBlue[800],
+    primaryColor: Colors.tealAccent,
 
-    // Define the default font family.
-    fontFamily: 'Georgia',
+    snackBarTheme: SnackBarThemeData(
+      backgroundColor: Colors.grey[900],
+      contentTextStyle: const TextStyle(color: Colors.white,)
 
-    // Define the default `TextTheme`. Use this to specify the default
-    // text styling for headlines, titles, bodies of text, and more.
-    textTheme: const TextTheme(
-      displayLarge: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
-      titleLarge: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
-      bodyMedium: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
-    ),
+    )
   );
 
 
