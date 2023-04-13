@@ -54,7 +54,7 @@ final alertMsgNotifierProvider =
 );
 
 typedef _$AlertMsgNotifier = AutoDisposeNotifier<bool>;
-String _$themeNotifierHash() => r'79e5be04503afbbe9fad50d193e9870fabda8d38';
+String _$themeNotifierHash() => r'30e3eadf96cee0a010a895a3aa1039197e5d186a';
 
 /// See also [ThemeNotifier].
 @ProviderFor(ThemeNotifier)

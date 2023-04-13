@@ -67,7 +67,7 @@ class ThemeNotifier extends _$ThemeNotifier {
   ThemeMode build() {
     return ThemeMode.system; // 最初のデータ
   }
-  void updateState(next) { // データを変更する関数
-    state = next; // データを上書き
+  void updateState(theme) { // データを変更する関数
+    state = theme; // データを上書き
   }
 }
