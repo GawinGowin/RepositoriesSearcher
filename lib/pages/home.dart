@@ -16,7 +16,7 @@ class Home extends HookConsumerWidget {
 
     final copyInputField = {...inputField};
     
-    final textEditingController = useTextEditingController();
+    final textEditingController = useTextEditingController(text: inputField["q"]);
     final focusNode = useFocusNode();
     
     nextPage () => MaterialPageRoute(builder: (context){return const Results();});
@@ -38,8 +38,7 @@ class Home extends HookConsumerWidget {
                 maxLines: 1,
                 maxLength: 256, //根拠：https://docs.github.com/ja/rest/search?apiVersion=2022-11-28#limitations-on-query-length
                 focusNode: focusNode,
-                controller: textEditingController,
-                
+                controller: textEditingController,     
                 decoration: InputDecoration(
                   border: const OutlineInputBorder(),
                   labelText: "Search",

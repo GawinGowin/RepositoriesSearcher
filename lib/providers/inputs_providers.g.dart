@@ -38,7 +38,7 @@ final searchFieldNotifierProvider = AutoDisposeNotifierProvider<
 );
 
 typedef _$SearchFieldNotifier = AutoDisposeNotifier<Map<String, dynamic>>;
-String _$alertMsgNotifierHash() => r'c8be9dcb913e81457d3a05ef907ca00387460b21';
+String _$alertMsgNotifierHash() => r'6e67dc4e50899c9000743477d403628075819004';
 
 /// See also [AlertMsgNotifier].
 @ProviderFor(AlertMsgNotifier)
@@ -54,4 +54,20 @@ final alertMsgNotifierProvider =
 );
 
 typedef _$AlertMsgNotifier = AutoDisposeNotifier<bool>;
+String _$themeNotifierHash() => r'79e5be04503afbbe9fad50d193e9870fabda8d38';
+
+/// See also [ThemeNotifier].
+@ProviderFor(ThemeNotifier)
+final themeNotifierProvider =
+    AutoDisposeNotifierProvider<ThemeNotifier, ThemeMode>.internal(
+  ThemeNotifier.new,
+  name: r'themeNotifierProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$themeNotifierHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+typedef _$ThemeNotifier = AutoDisposeNotifier<ThemeMode>;
 // ignore_for_file: unnecessary_raw_strings, subtype_of_sealed_class, invalid_use_of_internal_member, do_not_use_environment, prefer_const_constructors, public_member_api_docs, avoid_private_typedef_functions
