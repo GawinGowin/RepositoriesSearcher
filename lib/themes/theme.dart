@@ -31,5 +31,18 @@ ThemeData darkThemeData = ThemeData(
       )
     )
   ),
+  sliderTheme: SliderThemeData(
+    activeTrackColor: Colors.tealAccent,
+    inactiveTrackColor: Colors.teal.shade800,
+    thumbColor:Colors.tealAccent,
+  ),
+  inputDecorationTheme: const InputDecorationTheme(
+    focusedBorder: OutlineInputBorder(
+      borderSide:BorderSide(color: Colors.tealAccent)
+    ),
+    floatingLabelStyle: TextStyle(color: Colors.tealAccent,),
+    suffixIconColor: Colors.grey,
+
+  )
 
 );

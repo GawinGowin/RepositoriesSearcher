@@ -38,8 +38,7 @@ class Home extends HookConsumerWidget {
                 maxLines: 1,
                 maxLength: 256, //根拠：https://docs.github.com/ja/rest/search?apiVersion=2022-11-28#limitations-on-query-length
                 focusNode: focusNode,
-                controller: textEditingController,
-                
+                controller: textEditingController,     
                 decoration: InputDecoration(
                   border: const OutlineInputBorder(),
                   labelText: "Search",
