@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:repo_searcher/main.dart';
+import 'package:repo_searcher/pages/root.dart';
 
 
 void main() {
