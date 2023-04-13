@@ -127,6 +127,18 @@ Widget loadIcon(fPath){
     fPath,
     semanticsLabel: fileName
   );
-
-  return svg;
+  if (true){// ダークテーマ
+    return ColorFiltered(
+      colorFilter: const ColorFilter.matrix(<double>[
+        -1,  0,  0, 0, 255,
+        0, -1,  0, 0, 255,
+        0,  0, -1, 0, 255,
+        0,  0,  0, 1,   0,
+      ]),
+      child: svg,
+    );
+  }
+  else {
+    return svg;
+  }
 }

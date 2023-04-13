@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'inputs_providers.g.dart';
@@ -58,4 +59,15 @@ class AlertMsgNotifier extends _$AlertMsgNotifier {
   void activateState() {
     state = true;
   }  
+}
+
+@riverpod
+class ThemeNotifier extends _$ThemeNotifier {
+  @override
+  ThemeMode build() {
+    return ThemeMode.system; // 最初のデータ
+  }
+  void updateState(next) { // データを変更する関数
+    state = next; // データを上書き
+  }
 }
