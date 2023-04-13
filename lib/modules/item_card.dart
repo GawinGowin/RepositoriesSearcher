@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:path/path.dart' as path;
+import 'package:url_launcher/url_launcher.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:repo_searcher/providers/inputs_providers.dart';
@@ -49,9 +50,14 @@ class ItemCard extends ConsumerWidget {
     child: ListTile(
       title: Text('${itemList[index].name}'),
       subtitle: Text('${itemList[index].description}'),
-      trailing: IconButton(
+      
+      trailing: IconButton(//外部ページ遷移
         icon: const Icon(Icons.open_in_new),
-        onPressed: () {debugPrint('${itemList[index].html_url}');},
+        onPressed: () {
+          debugPrint('${itemList[index].html_url}');
+          launchUrl(Uri.parse(itemList[index].html_url),);
+        },
+
       ),
       onTap: () => showDialog<String>(
         context: context,
@@ -147,9 +153,9 @@ Widget loadIcon(String fPath, mode){
     return ColorFiltered(
       colorFilter: const ColorFilter.matrix(<double>[
         -1,  0,  0, 0, 255,
-        0, -1,  0, 0, 255,
-        0,  0, -1, 0, 255,
-        0,  0,  0, 1,   0,
+         0, -1,  0, 0, 255,
+         0,  0, -1, 0, 255,
+         0,  0,  0, 1,   0,
       ]),
       child: svg,
     );
