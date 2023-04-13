@@ -9,8 +9,6 @@ import 'package:repo_searcher/schemas/response_data.dart';
 import 'package:repo_searcher/providers/inputs_providers.dart';
 part 'data_providers.g.dart';
 
-//flutter pub run build_runner watch --delete-conflicting-outputs
-
 const String host = "api.github.com";
 const String path = '/search/repositories';
 
@@ -79,3 +77,7 @@ Future<dynamic> loadHeader() async {
     return header;
   } 
 }
+/**#Note
+ * build_runner起動コマンド
+ * flutter pub run build_runner watch --delete-conflicting-outputs
+ *  */
