@@ -16,7 +16,7 @@ class Home extends HookConsumerWidget {
 
     final copyInputField = {...inputField};
     
-    final textEditingController = useTextEditingController();
+    final textEditingController = useTextEditingController(text: inputField["q"]);
     final focusNode = useFocusNode();
     
     nextPage () => MaterialPageRoute(builder: (context){return const Results();});
