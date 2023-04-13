@@ -21,21 +21,28 @@ class BottomPagenation extends ConsumerWidget {
         copyInputField["page"] = "$number";
         ref.read(searchFieldNotifierProvider.notifier).updateState(copyInputField);
       }
-
       if(now){
-        return FilledButton(
+        return ElevatedButton(
           onPressed: onPressedFunction,
-          child: Text('$number'),
+          style: ElevatedButton.styleFrom(
+            minimumSize: const Size(10, 10),
+            shape: const RoundedRectangleBorder(),
+          ),
+          child: Text('$number', style: const TextStyle(fontSize: 18),),
         );
       }
-
       else{
         return ElevatedButton(
           onPressed: onPressedFunction,
-          child: Text('$number'),
+          style: ElevatedButton.styleFrom(
+            minimumSize: const Size(10, 10),
+            shape: const StadiumBorder()
+          ),
+          child: Text('$number', style: const TextStyle(fontSize: 18),),
         );
       }
     }
+
   int totalReposCountCopy = totalReposCount > 1000 ? 1000 : totalReposCount;
   double totalPagesdouble = totalReposCountCopy / repoPerPage;
   int totalPages = totalPagesdouble.ceil();
@@ -44,7 +51,7 @@ class BottomPagenation extends ConsumerWidget {
 
   if (totalPages == 1){
     return const SizedBox.shrink();
-  }    
+  } 
 
   else if (totalPages <= 7){
     for (var i = 1; i < totalPages + 1 ; i++){
@@ -95,9 +102,12 @@ class BottomPagenation extends ConsumerWidget {
     pageList.add(createNumButton(totalPages, false));
   }
 
+  double desiredWidth = 0.0;
+  List<dynamic> pageListCopy = [...pageList];
+
   return Row(
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: pageList,
-  );
+  );  
   }
 }
