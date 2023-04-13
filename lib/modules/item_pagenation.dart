@@ -105,9 +105,9 @@ class BottomPagenation extends ConsumerWidget {
   double desiredWidth = 0.0;
   List<dynamic> pageListCopy = [...pageList];
 
-  return Row(
+  return Row( // 画面サイズによっては RenderFlex overflowed
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: pageList,
-  );  
+  ); //どうしてもMainAxisAlignment.spaceEvenlyで配置がしたかった
   }
 }
