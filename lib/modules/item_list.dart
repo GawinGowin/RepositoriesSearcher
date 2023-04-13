@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:repo_searcher/modules/item_card.dart';
 
-Widget ItemList(context, itemList) {
+Widget createList(context, itemList) {
   if (itemList.length != 0){
     return ListView.builder(
       padding: const EdgeInsets.all(16),
