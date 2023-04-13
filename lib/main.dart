@@ -18,7 +18,6 @@ class RepositoriesSearcher extends StatelessWidget {
     return Consumer(
       builder: (context, ref, child){
         final defaultMode = ref.watch(themeNotifierProvider);
-
         return MaterialApp(
           home: const RootPage(),
           theme: lightThemeData,

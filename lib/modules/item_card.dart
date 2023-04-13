@@ -149,7 +149,7 @@ Widget loadIcon(String fPath, mode){
     fPath,
     semanticsLabel: fileName
   );
-  if (mode==ThemeMode.dark){// ダークテーマ
+  if (mode==ThemeMode.dark){// ダークテーマのときSVGを反転
     return ColorFiltered(
       colorFilter: const ColorFilter.matrix(<double>[
         -1,  0,  0, 0, 255,

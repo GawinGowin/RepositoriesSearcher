@@ -26,7 +26,6 @@ class Results extends HookConsumerWidget {
       Future.delayed(const Duration(seconds: 0), () {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         ref.read(alertMsgNotifierProvider.notifier).deactivateState();
-        debugPrint("Hey");
       });
     }
 

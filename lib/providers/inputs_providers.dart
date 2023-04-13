@@ -65,9 +65,9 @@ class AlertMsgNotifier extends _$AlertMsgNotifier {
 class ThemeNotifier extends _$ThemeNotifier {
   @override
   ThemeMode build() {
-    return ThemeMode.system; // 最初のデータ
+    return ThemeMode.system;
   }
-  void updateState(theme) { // データを変更する関数
-    state = theme; // データを上書き
+  void updateState(theme) {
+    state = theme;
   }
 }

@@ -102,9 +102,6 @@ class BottomPagenation extends ConsumerWidget {
     pageList.add(createNumButton(totalPages, false));
   }
 
-  double desiredWidth = 0.0;
-  List<dynamic> pageListCopy = [...pageList];
-
   return Row( // 画面サイズによっては RenderFlex overflowed
     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: pageList,

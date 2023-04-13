@@ -31,12 +31,13 @@ class RootPage extends ConsumerWidget {
     return Scaffold(
       body: pages[index],
       bottomNavigationBar: BottomNavigationBar(
-          items: items,
-          currentIndex: index,
-          onTap: (indexTap){
-            ref.read(pageNotifierProvider.notifier).updateState(indexTap);
-          },
-        )
+        key: const Key("BottomNavigationBar_rootPage"),
+        items: items,
+        currentIndex: index,
+        onTap: (indexTap){
+          ref.read(pageNotifierProvider.notifier).updateState(indexTap);
+        },
+      )
     );
   }
 }
