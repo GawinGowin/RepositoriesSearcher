@@ -15,9 +15,7 @@ class Settings extends StatelessWidget {
         child: Column(
           children: [
             Container(
-              //color: Colors.red,
               margin: const EdgeInsets.all(15),
-
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
