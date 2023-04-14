@@ -37,7 +37,7 @@
 
 ![settings](readme_img/setting.jpg)
 
-- 検索結果が1ページに収まらない場合はページネーションが登場
+- 検索結果が1ページに収まらない場合はページネーションが出現
 
 ![pagenation](readme_img/list.jpg)
 
