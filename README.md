@@ -1,31 +1,36 @@
-# repo_searcher
+# RepositoriesSearcher
 
-flutter engineer codecheck
+
+## 概要
+本アプリケーションはGithub上のリポジトリを検索するflutterアプリケーションです。
+
+<hr>
 
 ## Getting Started
 
-### 1. Clone the sample project
+### 1. このリポジトリのクローン
 
 ```sh
 git clone https://github.com/GawinGowin/RepositoriesSearcher
 ```
 
-### 2. Copy the config.yaml file to config.yaml file.
+### 2. コンフィグファイルの用意[Githubのトークンがある場合]
 
-Copy `.example.config.yaml` to `.config.yaml` file.
+#### 2.1 ファイルをコピーする
+
 
 ```bash
 cp .example.config.yaml .config.yaml
 ```
 
-### 3. Modify config.yaml file
+#### 2.2 `config.yaml` の記入
 
 ```yaml title=".config.yaml"
 "Authorization": "Bearer <YOUR-TOKEN>"
 ```
-put your **personal access token** or **GitHub App user access token** into `<YOUR-TOKEN>`
+**personal access token** もしくは **GitHub App user access token**  を `<YOUR-TOKEN>` に記入
 
-### 4. Install the dependecies and run app
+### 3. アプリの実行
 
 ```sh
 flutter pub get
