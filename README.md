@@ -1,5 +1,5 @@
 <p align="center">
-<img src="assets/appIcon_adaptive.png" width=200/>
+<img src="assets/appIcon.png" width=200/>
 </p>
 
 <p align="center">
