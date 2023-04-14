@@ -89,7 +89,7 @@ git clone https://github.com/GawinGowin/RepositoriesSearcher
 cp .example.config.yaml .config.yaml
 ```
 
-#### 2.2 `config.yaml` の記入
+#### 2.2 `.config.yaml` の記入
 
 ```yaml title=".config.yaml"
 "Authorization": "Bearer <YOUR-TOKEN>"
